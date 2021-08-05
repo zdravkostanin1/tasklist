@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 
+import 'CreateTaskScreen.dart';
+
 void main() {
-  runApp(MyApp());
+  runApp(MaterialApp(
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatefulWidget {
@@ -13,35 +17,51 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int bottomNavIndex = 0;
+  bool _changed = false;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        // A expandable calendar implemented as a appBar
+        /// A expandable calendar implemented as a appBar
         appBar: CalendarAppBar(
-          onDateChanged: (value) => print(value),
+          onDateChanged: (value) {
+            print(value);
+          },
           firstDate: DateTime.now().subtract(Duration(days: 140)),
           lastDate: DateTime.now(),
-          // colors
+
+          /// colors
           white: Colors.white,
           black: Colors.black,
           accent: Color(0xFF4562FE),
         ),
-        // Scaffold color
+
+        /// Scaffold color
         backgroundColor: Colors.white,
-        // This is the 'Add a task floating button'
+
+        /// This is the 'Add a task floating button'
         floatingActionButton: FloatingActionButton(
           backgroundColor: Color(0xFF4562FE),
           child: Icon(
             Icons.add,
           ),
-          // Functionality for the 'Add Task' button
-          onPressed: () {},
+
+          /// Functionality for the 'Add Task' button
+          onPressed: () {
+            setState(() {
+              /// Navigate to the second Screen e.g 'Create Task'
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return CreateTask();
+              }));
+            });
+          },
         ),
-        // Putting the floating button in the center
+
+        /// Putting the floating button in the center
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // BottomNavigationBar Customization
+
+        /// BottomNavigationBar Customization
         bottomNavigationBar: AnimatedBottomNavigationBar(
           icons: [Icons.home_filled, Icons.settings],
           activeIndex: bottomNavIndex,
@@ -53,6 +73,28 @@ class _MyAppState extends State<MyApp> {
             });
           },
         ),
+        // body: Column(
+        //   children: [
+        //     CheckboxListTile(
+        //       title: Text(
+        //         "This is my first task",
+        //         style: TextStyle(
+        //           fontSize: 19.0,
+        //         ),
+        //       ),
+        //       value: _changed,
+        //       onChanged: (newValue) {
+        //         setState(() {
+        //           _changed = newValue!;
+        //         });
+        //       },
+        //       controlAffinity:
+        //           ListTileControlAffinity.leading, //  <-- leading Checkbox
+        //       checkColor: Colors.black,
+        //       activeColor: Color(0xFF4562FE),
+        //     ),
+        //   ],
+        // ),
       ),
     );
   }

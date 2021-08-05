@@ -3,6 +3,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:calendar_appbar/calendar_appbar.dart';
 
 import 'CreateTaskScreen.dart';
+import 'Settings.dart';
 
 void main() {
   runApp(MaterialApp(
@@ -67,9 +68,21 @@ class _MyAppState extends State<MyApp> {
           activeIndex: bottomNavIndex,
           gapLocation: GapLocation.center,
           inactiveColor: Colors.grey,
+
+          /// Functionality of the BottomNavigationBar
           onTap: (int index) {
             setState(() {
               bottomNavIndex = index;
+              if (bottomNavIndex == 1) {
+                /// Navigate to the Settings Screen
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return SettingsPage();
+                }));
+
+                /// Setting bottomNavIndex to 0, so we can go to the 'Home' icon
+                /// on the navigation bottom screen
+                bottomNavIndex = 0;
+              }
             });
           },
         ),

@@ -14,7 +14,7 @@ class CreateTask extends StatelessWidget {
               /// and textfield
               child: Container(
                 width: 410.0,
-                height: 160.0,
+                height: 180.0,
                 padding: EdgeInsets.all(10),
                 child: Card(
                   /// Setting the shape of the Card Widget
@@ -29,6 +29,7 @@ class CreateTask extends StatelessWidget {
                       SizedBox(
                         height: 10.0,
                       ),
+
                       /// Create New Task text wdiget
                       Text(
                         '  Create New Task',
@@ -38,16 +39,38 @@ class CreateTask extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
+
                       /// Used SizedBox to put spaces between the Text widgets
                       SizedBox(
                         height: 20.0,
                       ),
+
                       /// Name Text Widget
                       Text(
                         '    Name',
                         style: TextStyle(
                           color: Colors.grey,
                           fontSize: 13.0,
+                        ),
+                      ),
+
+                      /// Used SizedBox to put spaces between the Text widget & TextField
+                      SizedBox(
+                        height: 10.0,
+                      ),
+
+                      /// Used a container, so i can change the size of the TextField widget
+                      Container(
+                        /// Fixing a width
+                        width: 370.0,
+
+                        /// Setting the margins
+                        margin: EdgeInsets.fromLTRB(12.5, 0.0, 12.5, 0.0),
+                        child: TextField(
+                          style: TextStyle(
+                            /// Changing the color of the text that the users input
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ],

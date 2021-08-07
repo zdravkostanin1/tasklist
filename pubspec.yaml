@@ -30,6 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   animated_bottom_navigation_bar: ^0.3.2
   calendar_appbar: ^0.0.3
+  date_picker_timeline: ^1.2.3
 
 
 dev_dependencies:

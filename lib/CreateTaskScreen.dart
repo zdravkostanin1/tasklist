@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:date_picker_timeline/date_picker_timeline.dart';
 
-class CreateTask extends StatelessWidget {
+class CreateTask extends StatefulWidget {
   const CreateTask({Key? key}) : super(key: key);
 
+  @override
+  _CreateTaskState createState() => _CreateTaskState();
+}
+
+class _CreateTaskState extends State<CreateTask> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -98,6 +104,22 @@ class CreateTask extends StatelessWidget {
                       color: Colors.grey,
                       fontSize: 20.0,
                     ),
+                  ),
+
+                  /// Date Picker
+                  DatePicker(
+                    DateTime.now(),
+                    initialSelectedDate: DateTime.now(),
+
+                    /// Colors
+                    selectionColor: Colors.black,
+                    selectedTextColor: Colors.white,
+                    onDateChange: (date) {
+                      /// Selected new date
+                      setState(() {
+                        // _selectedValue = date;
+                      });
+                    },
                   ),
                 ],
               ),

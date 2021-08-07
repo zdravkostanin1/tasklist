@@ -78,6 +78,30 @@ class CreateTask extends StatelessWidget {
                 ),
               ),
             ),
+
+            /// Container for the Date picker, descripition, remind me button
+            Container(
+              /// Fixing Width & height
+              width: 380.0,
+              height: 360.0,
+              padding: EdgeInsets.all(10),
+
+              /// Colors
+              color: Color(0xFF004953),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  /// Date Text Widget + styling
+                  Text(
+                    ' Date',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),

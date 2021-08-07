@@ -107,6 +107,9 @@ class _CreateTaskState extends State<CreateTask> {
                   ),
 
                   /// Date Picker
+                  SizedBox(
+                    height: 10.0,
+                  ),
                   DatePicker(
                     DateTime.now(),
                     initialSelectedDate: DateTime.now(),

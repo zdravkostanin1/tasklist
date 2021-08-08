@@ -87,7 +87,7 @@ class _CreateTaskState extends State<CreateTask> {
             Container(
               /// Fixing Width & height
               width: 380.0,
-              height: 260.0,
+              height: 280.0,
               padding: EdgeInsets.all(10),
 
               /// Colors

@@ -7,6 +7,8 @@ class CreateTask extends StatefulWidget {
 }
 
 class _CreateTaskState extends State<CreateTask> {
+  bool isSwitched = false;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -170,7 +172,30 @@ class _CreateTaskState extends State<CreateTask> {
               children: [
                 Text(
                   '    Remind me',
-                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                  style: TextStyle(
+                    fontSize: 18.0,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                /// SizedBox for space
+                SizedBox(
+                  width: 240.0,
+                ),
+
+                /// Toggle Button
+                Switch(
+                  value: isSwitched,
+                  onChanged: (value) {
+                    setState(() {
+                      isSwitched = value;
+                    });
+                  },
+
+                  /// Colors of the toggle button
+                  activeTrackColor: Colors.orange,
+                  activeColor: Colors.yellow,
                 ),
               ],
             ),

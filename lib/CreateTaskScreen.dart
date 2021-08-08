@@ -199,6 +199,28 @@ class _CreateTaskState extends State<CreateTask> {
                 ),
               ],
             ),
+
+            /// SizedBox for space
+            SizedBox(
+              height: 40.0,
+            ),
+
+            /// Wrapped our ElevatedButton, in a container to fix the size of it.
+            Container(
+              width: 380.0,
+              height: 40.0,
+
+              /// Create Task Button
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF4562FE),
+                ),
+
+                /// Functionality of the Create Task Button
+                onPressed: () {},
+                child: Text('Create Task'),
+              ),
+            ),
           ],
         ),
       ),

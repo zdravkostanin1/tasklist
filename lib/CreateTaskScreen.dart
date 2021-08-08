@@ -87,7 +87,7 @@ class _CreateTaskState extends State<CreateTask> {
             Container(
               /// Fixing Width & height
               width: 380.0,
-              height: 360.0,
+              height: 260.0,
               padding: EdgeInsets.all(10),
 
               /// Colors
@@ -134,6 +134,26 @@ class _CreateTaskState extends State<CreateTask> {
                     style: TextStyle(
                       color: Colors.grey,
                       fontSize: 20.0,
+                    ),
+                  ),
+
+                  /// SizedBox for space
+                  SizedBox(
+                    height: 10.0,
+                  ),
+
+                  /// Container for the Description TextField
+                  Container(
+                    /// Fixing a width
+                    width: 360.0,
+
+                    /// Setting the margins
+                    margin: EdgeInsets.fromLTRB(12, 0.0, 12, 0.0),
+                    child: TextField(
+                      style: TextStyle(
+                        /// Changing the color of the text that the users input
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ],

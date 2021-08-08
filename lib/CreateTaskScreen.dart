@@ -159,6 +159,21 @@ class _CreateTaskState extends State<CreateTask> {
                 ],
               ),
             ),
+
+            /// Sized Box for space
+            SizedBox(
+              height: 30.0,
+            ),
+
+            /// Row for the Text Widget, and Toggle Button
+            Row(
+              children: [
+                Text(
+                  '    Remind me',
+                  style: TextStyle(fontSize: 16.0, color: Colors.black),
+                ),
+              ],
+            ),
           ],
         ),
       ),

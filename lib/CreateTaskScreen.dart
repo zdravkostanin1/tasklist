@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 
 class CreateTask extends StatefulWidget {
-  const CreateTask({Key? key}) : super(key: key);
-
   @override
   _CreateTaskState createState() => _CreateTaskState();
 }
@@ -123,6 +121,20 @@ class _CreateTaskState extends State<CreateTask> {
                         // _selectedValue = date;
                       });
                     },
+                  ),
+
+                  /// SizedBox for space
+                  SizedBox(
+                    height: 10.0,
+                  ),
+
+                  /// Description Text Widget
+                  Text(
+                    ' Description',
+                    style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 20.0,
+                    ),
                   ),
                 ],
               ),

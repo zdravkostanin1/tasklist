@@ -20,6 +20,18 @@ class _MyAppState extends State<MyApp> {
   bool changed = false;
   String taskName = CreateTask.taskName;
 
+  /// Setting the default TextDecoration for the TaskName to be none, when the
+  /// checkbox isn't checked
+  TextDecoration checkTextDecoration = TextDecoration.none;
+
+  /// This method checks if the changed value, is true, e.g checked
+  void checkForTextStyle() {
+    if (changed == true) {
+      /// If the checkbox is checked, then put a line through the text widget.
+      checkTextDecoration = TextDecoration.lineThrough;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -101,14 +113,14 @@ class _MyAppState extends State<MyApp> {
                     onChanged: (value) {
                       setState(() {
                         changed = value!;
+                        checkForTextStyle();
                       });
                     },
                     title: Text(
                       /// setting the value of the task's name
                       taskName,
                       style: TextStyle(
-                        fontSize: 18.0,
-                      ),
+                          fontSize: 18.0, decoration: checkTextDecoration),
                     ),
                   )
 

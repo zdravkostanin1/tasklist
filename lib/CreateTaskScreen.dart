@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 
+import 'main.dart';
+
 class CreateTask extends StatefulWidget {
+  static bool isSwitched = false;
+  static String taskName = '';
+  static String descriptionOfTask = '';
+  static var selectedDate = DateTime.now();
+  static bool clickedOnCreateTask = false;
+
   @override
   _CreateTaskState createState() => _CreateTaskState();
 }
 
 class _CreateTaskState extends State<CreateTask> {
-  bool isSwitched = false;
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -20,7 +26,7 @@ class _CreateTaskState extends State<CreateTask> {
             children: [
               SafeArea(
                 /// The Bottom Card widget for the 'Create New Task' text
-                /// and textfield
+                /// and TextField
                 child: Container(
                   width: 410.0,
                   height: 180.0,
@@ -76,6 +82,11 @@ class _CreateTaskState extends State<CreateTask> {
                           /// Setting the margins
                           margin: EdgeInsets.fromLTRB(12.5, 0.0, 12.5, 0.0),
                           child: TextField(
+                            /// OnChanged function of the TextField
+                            onChanged: (value) {
+                              /// Retrieving what is typed by the user in the TextField e.g TaskName
+                              CreateTask.taskName = value;
+                            },
                             style: TextStyle(
                               /// Changing the color of the text that the users input
                               color: Colors.white,
@@ -123,7 +134,8 @@ class _CreateTaskState extends State<CreateTask> {
                       onDateChange: (date) {
                         /// Selected new date
                         setState(() {
-                          // _selectedValue = date;
+                          /// Retrieving the selected date from the user & saving it
+                          CreateTask.selectedDate = date;
                         });
                       },
                     ),
@@ -155,6 +167,10 @@ class _CreateTaskState extends State<CreateTask> {
                       /// Setting the margins
                       margin: EdgeInsets.fromLTRB(12, 0.0, 12, 0.0),
                       child: TextField(
+                        onChanged: (value) {
+                          /// Retrieving what is typed by the user in the TextField
+                          CreateTask.descriptionOfTask = value;
+                        },
                         style: TextStyle(
                           /// Changing the color of the text that the users input
                           color: Colors.white,
@@ -189,10 +205,11 @@ class _CreateTaskState extends State<CreateTask> {
 
                   /// Toggle Button
                   Switch(
-                    value: isSwitched,
+                    value: CreateTask.isSwitched,
                     onChanged: (value) {
                       setState(() {
-                        isSwitched = value;
+                        /// Changing if the toggle button is clicked
+                        CreateTask.isSwitched = value;
                       });
                     },
 
@@ -221,7 +238,20 @@ class _CreateTaskState extends State<CreateTask> {
                   ),
 
                   /// Functionality of the Create Task Button
-                  onPressed: () {},
+                  onPressed: () {
+                    /// When clicked, pushing to the new screen
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return MyApp();
+                    }));
+
+                    /// When the user clicks on the 'Create Task' button
+                    /// we update the variable clickedOnCreateTask, to then use it
+                    CreateTask.clickedOnCreateTask = true;
+                    // print(CreateTask.taskName);
+                    // print(CreateTask.selectedDate);
+                    // print(CreateTask.descriptionOfTask);
+                  },
                   child: Text('Create Task'),
                 ),
               ),

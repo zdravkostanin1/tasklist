@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
-
 import 'CreateTaskScreen.dart';
 import 'Settings.dart';
 
@@ -18,7 +17,8 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int bottomNavIndex = 0;
-  bool _changed = false;
+  bool changed = false;
+  String taskName = CreateTask.taskName;
 
   @override
   Widget build(BuildContext context) {
@@ -86,28 +86,36 @@ class _MyAppState extends State<MyApp> {
             });
           },
         ),
-        // body: Column(
-        //   children: [
-        //     CheckboxListTile(
-        //       title: Text(
-        //         "This is my first task",
-        //         style: TextStyle(
-        //           fontSize: 19.0,
-        //         ),
-        //       ),
-        //       value: _changed,
-        //       onChanged: (newValue) {
-        //         setState(() {
-        //           _changed = newValue!;
-        //         });
-        //       },
-        //       controlAffinity:
-        //           ListTileControlAffinity.leading, //  <-- leading Checkbox
-        //       checkColor: Colors.black,
-        //       activeColor: Color(0xFF4562FE),
-        //     ),
-        //   ],
-        // ),
+        body: Column(
+          children: [
+            /// We retrieve the value of clickedOnCreateTask from
+            /// CreateTaskScreen class, and with a ternary operator check if it's true so then
+            /// we can add the task, in a CheckBoxListTile with the name of the task
+            CreateTask.clickedOnCreateTask
+                ? CheckboxListTile(
+                    value: changed,
+
+                    /// This changes where the checkbox starts - right now before the Text
+                    controlAffinity: ListTileControlAffinity.leading,
+                    activeColor: Color(0xFF4562FE),
+                    onChanged: (value) {
+                      setState(() {
+                        changed = value!;
+                      });
+                    },
+                    title: Text(
+                      /// setting the value of the task's name
+                      taskName,
+                      style: TextStyle(
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  )
+
+                /// If value equals false just put an empty container
+                : Container(),
+          ],
+        ),
       ),
     );
   }

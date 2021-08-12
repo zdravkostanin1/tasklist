@@ -20,6 +20,9 @@ class _MyAppState extends State<MyApp> {
   bool changed = false;
   String taskName = CreateTask.taskName;
 
+  /// Variable for the Task Name color
+  Color colorOfTaskName = Color(0xFF000000);
+
   /// Setting the default TextDecoration for the TaskName to be none, when the
   /// checkbox isn't checked
   TextDecoration checkTextDecoration = TextDecoration.none;
@@ -29,6 +32,9 @@ class _MyAppState extends State<MyApp> {
     if (changed == true) {
       /// If the checkbox is checked, then put a line through the text widget.
       checkTextDecoration = TextDecoration.lineThrough;
+
+      /// Setting the variable's color from black to red, after the user checks the box
+      colorOfTaskName = Color(0xFFD22B2B);
     }
   }
 
@@ -113,6 +119,8 @@ class _MyAppState extends State<MyApp> {
                     onChanged: (value) {
                       setState(() {
                         changed = value!;
+
+                        /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
                         checkForTextStyle();
                       });
                     },
@@ -120,7 +128,10 @@ class _MyAppState extends State<MyApp> {
                       /// setting the value of the task's name
                       taskName,
                       style: TextStyle(
-                          fontSize: 18.0, decoration: checkTextDecoration),
+                        fontSize: 18.0,
+                        color: colorOfTaskName,
+                        decoration: checkTextDecoration,
+                      ),
                     ),
                   )
 

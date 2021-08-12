@@ -115,6 +115,11 @@ class _MyAppState extends State<MyApp> {
 
                     /// This changes where the checkbox starts - right now before the Text
                     controlAffinity: ListTileControlAffinity.leading,
+
+                    /// Added the description of the task, below the Task's name in the CheckboxListTile widget.
+                    subtitle: Text(
+                      CreateTask.descriptionOfTask,
+                    ),
                     activeColor: Color(0xFF4562FE),
                     onChanged: (value) {
                       setState(() {

@@ -5,9 +5,11 @@ import 'CreateTaskScreen.dart';
 import 'Settings.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
+  runApp(
+    MaterialApp(
+      home: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -106,43 +108,90 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Column(
           children: [
-            /// We retrieve the value of clickedOnCreateTask from
-            /// CreateTaskScreen class, and with a ternary operator check if it's true so then
-            /// we can add the task, in a CheckBoxListTile with the name of the task
+            /// We  use a ternary operator to check if somebody clicked on the 'Create Task' button.
             CreateTask.clickedOnCreateTask
-                ? CheckboxListTile(
-                    value: changed,
 
-                    /// This changes where the checkbox starts - right now before the Text
-                    controlAffinity: ListTileControlAffinity.leading,
-
-                    /// Added the description of the task, below the Task's name in the CheckboxListTile widget.
-                    subtitle: Text(
-                      CreateTask.descriptionOfTask,
-                    ),
-                    activeColor: Color(0xFF4562FE),
-                    onChanged: (value) {
-                      setState(() {
-                        changed = value!;
-
-                        /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
-                        checkForTextStyle();
-                      });
-                    },
-                    title: Text(
-                      /// setting the value of the task's name
-                      taskName,
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        color: colorOfTaskName,
-                        decoration: checkTextDecoration,
-                      ),
+                /// if clicked, we put an expanded widget, to fit the most possible tasks in the screen.
+                ? Expanded(
+                    /// We use a listView.builder to build widgets from the list that we want.
+                    child: ListView.builder(
+                      /// The count of the widgets to build
+                      itemCount: CreateTask.taskList.length,
+                      itemBuilder: (context, index) {
+                        /// Here we return the CheckboxListTile's saved in the taskList with the index
+                        return CreateTask.taskList[index];
+                      },
                     ),
                   )
 
-                /// If value equals false just put an empty container
+                /// If 'Create Task' button is not clicked, put an empty container, e.g task is not created
                 : Container(),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+/// This is the CheckboxListTile widget template that we'll be using.
+class TaskWidget extends StatefulWidget {
+  static Color textColor = Color(0xFF000000);
+  static TextDecoration textDec = TextDecoration.none;
+
+  /// Created an object so i could access the 'textOfTheTaskName' after initialization
+  static TaskWidget taskWidgetObject = TaskWidget('');
+
+  /// Variable to store every task's name individually
+  final String textOfTheTaskName;
+
+  /// Constructor, so every time a new widget of CheckboxListTile is called, we pass a new task name
+  TaskWidget(this.textOfTheTaskName);
+
+  @override
+  _TaskWidgetState createState() => _TaskWidgetState();
+}
+
+class _TaskWidgetState extends State<TaskWidget> {
+  bool checkboxChecked = false;
+
+  void checksTextStyle() {
+    if (checkboxChecked == true) {
+      /// If the checkbox is checked, then put a line through the text widget.
+      // TaskWidget.textDec = TextDecoration.lineThrough;
+
+      /// Setting the variable's color from black to red, after the user checks the box
+      // TaskWidget.textColor = Color(0xFFD22B2B);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+      value: checkboxChecked,
+
+      /// This changes where the checkbox starts - right now before the Text e.g checkbox is in front of the text
+      controlAffinity: ListTileControlAffinity.leading,
+
+      /// Added the description of the task, below the Task's name in the CheckboxListTile subtitle property.
+      subtitle: Text(
+        CreateTask.descriptionOfTask,
+      ),
+      activeColor: Color(0xFF4562FE),
+      onChanged: (value) {
+        setState(() {
+          checkboxChecked = value!;
+
+          /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
+          checksTextStyle();
+        });
+      },
+      title: Text(
+        /// Using the object of the TaskWidget, we access the variable and set the Task Name, based on the passed String
+        widget.textOfTheTaskName,
+        style: TextStyle(
+          fontSize: 18.0,
+          color: Colors.black,
+          decoration: TaskWidget.textDec,
         ),
       ),
     );

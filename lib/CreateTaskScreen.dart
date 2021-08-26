@@ -9,6 +9,10 @@ class CreateTask extends StatefulWidget {
   static String descriptionOfTask = '';
   static var selectedDate = DateTime.now();
   static bool clickedOnCreateTask = false;
+  static int counter = 0;
+  static List<TaskWidget> taskList = [];
+  static List<String> savedTasksName = [];
+  static List<String> savedDescriptionsName = [];
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
@@ -248,6 +252,25 @@ class _CreateTaskState extends State<CreateTask> {
                     /// When the user clicks on the 'Create Task' button
                     /// we update the variable clickedOnCreateTask, to then use it
                     CreateTask.clickedOnCreateTask = true;
+
+                    /// We add the task name to the 'savedTasksName' list
+                    CreateTask.savedTasksName.add(CreateTask.taskName);
+
+                    /// Check to see if the savedTasksName.length == 1, to still be able to use the counter
+                    /// variable, without an error, because when we create the first task, we need to access the first value of the list.
+                    if (CreateTask.savedTasksName.length == 1) {
+                      /// code
+                    } else {
+                      /// After we have accessed the first variable, next time, we increment the counter variable
+                      /// to access the next task name..
+                      CreateTask.counter++;
+                    }
+
+                    /// We add a TaskWidget to the task's list, passing the
+                    /// string that is based on the savedTasksName list, using the counter of the widget number as the index
+                    CreateTask.taskList.add(TaskWidget(
+                        CreateTask.savedTasksName[CreateTask.counter]));
+                    // print(myTaskWidgets.length);
                     // print(CreateTask.taskName);
                     // print(CreateTask.selectedDate);
                     // print(CreateTask.descriptionOfTask);

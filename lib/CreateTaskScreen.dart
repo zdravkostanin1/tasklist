@@ -174,7 +174,14 @@ class _CreateTaskState extends State<CreateTask> {
                       child: TextField(
                         onChanged: (value) {
                           /// Retrieving what is typed by the user in the TextField
-                          CreateTask.descriptionOfTask = value;
+                          /// Checking if the value of what is typed is "blank", so that we add it as blank to the list
+                          /// and it doesn't replicate with the last task that was created description
+                          if (value == '') {
+                            CreateTask.descriptionOfTask = value;
+                          } else {
+                            /// If value is not blank, then set value = string var
+                            CreateTask.descriptionOfTask = value;
+                          }
                         },
                         style: TextStyle(
                           /// Changing the color of the text that the users input
@@ -289,9 +296,6 @@ class _CreateTaskState extends State<CreateTask> {
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
                             CreateTask.counterOfTasksDescription]));
-                    // print(CreateTask.taskName);
-                    // print(CreateTask.selectedDate);
-                    // print(CreateTask.descriptionOfTask);
                   },
                   child: Text('Create Task'),
                 ),

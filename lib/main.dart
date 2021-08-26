@@ -139,13 +139,17 @@ class TaskWidget extends StatefulWidget {
   static TextDecoration textDec = TextDecoration.none;
 
   /// Created an object so i could access the 'textOfTheTaskName' after initialization
-  static TaskWidget taskWidgetObject = TaskWidget('');
+  static TaskWidget taskWidgetObject = TaskWidget('', '');
 
   /// Variable to store every task's name individually
   final String textOfTheTaskName;
 
+  /// Variable to store every task's description individually
+  final String textOfTheTasksDescription;
+
   /// Constructor, so every time a new widget of CheckboxListTile is called, we pass a new task name
-  TaskWidget(this.textOfTheTaskName);
+  /// also we pass a new description of the task.
+  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription);
 
   @override
   _TaskWidgetState createState() => _TaskWidgetState();
@@ -174,7 +178,8 @@ class _TaskWidgetState extends State<TaskWidget> {
 
       /// Added the description of the task, below the Task's name in the CheckboxListTile subtitle property.
       subtitle: Text(
-        CreateTask.descriptionOfTask,
+        /// Using the object of the TaskWidget, we access the variable and set the Task Description, based on the passed String
+        widget.textOfTheTasksDescription,
       ),
       activeColor: Color(0xFF4562FE),
       onChanged: (value) {

@@ -9,7 +9,8 @@ class CreateTask extends StatefulWidget {
   static String descriptionOfTask = '';
   static var selectedDate = DateTime.now();
   static bool clickedOnCreateTask = false;
-  static int counter = 0;
+  static int counterOfTasksName = 0;
+  static int counterOfTasksDescription = 0;
   static List<TaskWidget> taskList = [];
   static List<String> savedTasksName = [];
   static List<String> savedDescriptionsName = [];
@@ -49,7 +50,7 @@ class _CreateTaskState extends State<CreateTask> {
                           height: 10.0,
                         ),
 
-                        /// Create New Task text wdiget
+                        /// Create New Task text widget
                         Text(
                           '  Create New Task',
                           textAlign: TextAlign.left,
@@ -256,6 +257,10 @@ class _CreateTaskState extends State<CreateTask> {
                     /// We add the task name to the 'savedTasksName' list
                     CreateTask.savedTasksName.add(CreateTask.taskName);
 
+                    /// We add the tasks description to the 'savedDescriptionsName' list
+                    CreateTask.savedDescriptionsName
+                        .add(CreateTask.descriptionOfTask);
+
                     /// Check to see if the savedTasksName.length == 1, to still be able to use the counter
                     /// variable, without an error, because when we create the first task, we need to access the first value of the list.
                     if (CreateTask.savedTasksName.length == 1) {
@@ -263,14 +268,27 @@ class _CreateTaskState extends State<CreateTask> {
                     } else {
                       /// After we have accessed the first variable, next time, we increment the counter variable
                       /// to access the next task name..
-                      CreateTask.counter++;
+                      CreateTask.counterOfTasksName++;
+                    }
+
+                    /// Check to see if the savedDescriptionsName.length == 1, to still be able to use the counter
+                    /// variable, without an error, because when we create the first task, we need to access the first value of the list.
+                    if (CreateTask.savedDescriptionsName.length == 1) {
+                      /// code
+                    } else {
+                      /// After we have accessed the first variable, next time, we increment the counter variable
+                      /// to access the next task name..
+                      CreateTask.counterOfTasksDescription++;
                     }
 
                     /// We add a TaskWidget to the task's list, passing the
                     /// string that is based on the savedTasksName list, using the counter of the widget number as the index
+                    /// We also add the description of the tasks, which is also based on the list of Descriptions.
                     CreateTask.taskList.add(TaskWidget(
-                        CreateTask.savedTasksName[CreateTask.counter]));
-                    // print(myTaskWidgets.length);
+                        CreateTask
+                            .savedTasksName[CreateTask.counterOfTasksName],
+                        CreateTask.savedDescriptionsName[
+                            CreateTask.counterOfTasksDescription]));
                     // print(CreateTask.taskName);
                     // print(CreateTask.selectedDate);
                     // print(CreateTask.descriptionOfTask);

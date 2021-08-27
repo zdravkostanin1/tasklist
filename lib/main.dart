@@ -75,6 +75,9 @@ class _MyAppState extends State<MyApp> {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return CreateTask();
               }));
+
+              /// After the user clicks to make a new task, delete the last task's description e.g clear
+              CreateTask.descriptionController.clear();
             });
           },
         ),

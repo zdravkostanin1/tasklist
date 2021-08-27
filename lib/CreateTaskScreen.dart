@@ -14,6 +14,7 @@ class CreateTask extends StatefulWidget {
   static List<TaskWidget> taskList = [];
   static List<String> savedTasksName = [];
   static List<String> savedDescriptionsName = [];
+  static TextEditingController descriptionController = TextEditingController();
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
@@ -174,19 +175,15 @@ class _CreateTaskState extends State<CreateTask> {
                       child: TextField(
                         onChanged: (value) {
                           /// Retrieving what is typed by the user in the TextField
-                          /// Checking if the value of what is typed is "blank", so that we add it as blank to the list
-                          /// and it doesn't replicate with the last task that was created description
-                          if (value == '') {
-                            CreateTask.descriptionOfTask = value;
-                          } else {
-                            /// If value is not blank, then set value = string var
-                            CreateTask.descriptionOfTask = value;
-                          }
+                          CreateTask.descriptionOfTask = value;
                         },
                         style: TextStyle(
                           /// Changing the color of the text that the users input
                           color: Colors.white,
                         ),
+
+                        /// Controller property to see, what value does the textField store
+                        controller: CreateTask.descriptionController,
                       ),
                     ),
                   ],
@@ -265,8 +262,22 @@ class _CreateTaskState extends State<CreateTask> {
                     CreateTask.savedTasksName.add(CreateTask.taskName);
 
                     /// We add the tasks description to the 'savedDescriptionsName' list
-                    CreateTask.savedDescriptionsName
-                        .add(CreateTask.descriptionOfTask);
+
+                    /// We make a check to see if the description box is empty
+                    /// e.g when the user didn't set any description of the task
+                    /// we check with the TextEditingController's value
+                    if (CreateTask.descriptionController.text.isEmpty) {
+                      /// then we save it as a empty string as the var value
+                      CreateTask.descriptionOfTask = '';
+
+                      /// we then add to the list.
+                      CreateTask.savedDescriptionsName
+                          .add(CreateTask.descriptionOfTask);
+                    } else {
+                      /// If description not empty, just add the task desc to list..
+                      CreateTask.savedDescriptionsName
+                          .add(CreateTask.descriptionOfTask);
+                    }
 
                     /// Check to see if the savedTasksName.length == 1, to still be able to use the counter
                     /// variable, without an error, because when we create the first task, we need to access the first value of the list.

@@ -125,7 +125,10 @@ class TaskWidget extends StatefulWidget {
 
   /// Created an object so i could access the 'textOfTheTaskName' after initialization
   static TaskWidget taskWidgetObject = TaskWidget(
-      '', '', CreateTask.textDecorList[CreateTask.counterOfTextDecorations]);
+      '',
+      '',
+      CreateTask.textDecorList[CreateTask.counterOfTextDecorations],
+      Colors.black);
 
   /// Variable to store every task's name individually
   final String textOfTheTaskName;
@@ -136,11 +139,15 @@ class TaskWidget extends StatefulWidget {
   /// A variable, used in the constructor, so the user could pass a value when calling the widget.
   TextDecoration decorOfText;
 
+  /// Color variable, to use in the constructor, for the user to pass a value when calling the widget.
+  Color colorOfTasksText;
+
   /// Constructor, so every time a new widget of CheckboxListTile is called, we pass a new task name
   /// also we pass a new description of the task.
   /// initializing the decoration of text as well.
-  TaskWidget(
-      this.textOfTheTaskName, this.textOfTheTasksDescription, this.decorOfText);
+  /// also the color.
+  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription,
+      this.decorOfText, this.colorOfTasksText);
 
   @override
   _TaskWidgetState createState() => _TaskWidgetState();
@@ -150,30 +157,28 @@ class _TaskWidgetState extends State<TaskWidget> {
   bool checkboxChecked = false;
 
   /// A method that checks if task is checked, then changes the TextStyle decoration
-  /// to a lineThrough.
-  void checkTextDecoration() {
+  /// to a lineThrough. + Changes the color of the completed task's text to red.
+  void checkTextDecorationAndColor() {
     if (checkboxChecked == true) {
       setState(() {
         /// Change the value of the specific item in list
         CreateTask.textDecorList[CreateTask.counterOfTextDecorations] =
             TextDecoration.lineThrough;
 
+        /// Getting the current index of the list's value, and changing the color of the task from black to red
+        CreateTask.colorList[CreateTask.counterOfColors] = Colors.red;
+
         /// Then assign the changed value to the variable used for the decoration.
         widget.decorOfText =
             CreateTask.textDecorList[CreateTask.counterOfTextDecorations];
+
+        /// Assigning the value of the list at the counter index to the variable that is used
+        /// to represent the color of the widgets. Updating the color.
+        widget.colorOfTasksText =
+            CreateTask.colorList[CreateTask.counterOfColors];
       });
     }
   }
-
-  // void checksTextStyle() {
-  //   if (checkboxChecked == true) {
-  //     /// If the checkbox is checked, then put a line through the text widget.
-  //     // TaskWidget.textDec = TextDecoration.lineThrough;
-  //
-  //     /// Setting the variable's color from black to red, after the user checks the box
-  //     // TaskWidget.textColor = Color(0xFFD22B2B);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -194,8 +199,7 @@ class _TaskWidgetState extends State<TaskWidget> {
           checkboxChecked = value!;
 
           /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
-          // checksTextStyle();
-          checkTextDecoration();
+          checkTextDecorationAndColor();
         });
       },
       title: Text(
@@ -203,7 +207,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         widget.textOfTheTaskName,
         style: TextStyle(
           fontSize: 18.0,
-          color: Colors.black,
+          color: widget.colorOfTasksText,
           decoration: widget.decorOfText,
         ),
       ),

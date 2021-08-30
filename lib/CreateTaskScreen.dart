@@ -16,6 +16,8 @@ class CreateTask extends StatefulWidget {
   static TextEditingController descriptionController = TextEditingController();
   static int counterOfTextDecorations = 0;
   static List<TextDecoration> textDecorList = [];
+  static List<Color> colorList = [];
+  static int counterOfColors = 0;
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
@@ -262,6 +264,9 @@ class _CreateTaskState extends State<CreateTask> {
                     /// Adding an TextDecoration that is equal to none for every new task.
                     CreateTask.textDecorList.add(TextDecoration.none);
 
+                    /// Adding the color of the task to the list
+                    CreateTask.colorList.add(Colors.black);
+
                     /// We add the task name to the 'savedTasksName' list
                     CreateTask.savedTasksName.add(CreateTask.taskName);
 
@@ -313,6 +318,16 @@ class _CreateTaskState extends State<CreateTask> {
                       CreateTask.counterOfTextDecorations++;
                     }
 
+                    /// Check to see if the colorList.length == 1, to still be able to use the counter
+                    /// variable, without an error, because when we create the first task, we need to access the first value of the list.
+                    if (CreateTask.colorList.length == 1) {
+                      ///code
+                    } else {
+                      /// After we have accessed the first value, next time, we increment the counter variable
+                      /// to access the next task name..
+                      CreateTask.counterOfColors++;
+                    }
+
                     /// We add a TaskWidget to the task's list, passing the
                     /// string that is based on the savedTasksName list, using the counter of the widget number as the index
                     /// We also add the description of the tasks, which is also based on the list of Descriptions.
@@ -321,8 +336,9 @@ class _CreateTaskState extends State<CreateTask> {
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
                             CreateTask.counterOfTasksDescription],
-                        CreateTask.textDecorList[
-                            CreateTask.counterOfTextDecorations]));
+                        CreateTask
+                            .textDecorList[CreateTask.counterOfTextDecorations],
+                        CreateTask.colorList[CreateTask.counterOfColors]));
                   },
                   child: Text('Create Task'),
                 ),

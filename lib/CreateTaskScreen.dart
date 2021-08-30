@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
-
-import 'main.dart';
+import 'package:tasklist_flutter/main.dart';
 
 class CreateTask extends StatefulWidget {
   static bool isSwitched = false;
@@ -15,6 +14,8 @@ class CreateTask extends StatefulWidget {
   static List<String> savedTasksName = [];
   static List<String> savedDescriptionsName = [];
   static TextEditingController descriptionController = TextEditingController();
+  static int counterOfTextDecorations = 0;
+  static List<TextDecoration> textDecorList = [];
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
@@ -258,6 +259,9 @@ class _CreateTaskState extends State<CreateTask> {
                     /// we update the variable clickedOnCreateTask, to then use it
                     CreateTask.clickedOnCreateTask = true;
 
+                    /// Adding an TextDecoration that is equal to none for every new task.
+                    CreateTask.textDecorList.add(TextDecoration.none);
+
                     /// We add the task name to the 'savedTasksName' list
                     CreateTask.savedTasksName.add(CreateTask.taskName);
 
@@ -294,9 +298,19 @@ class _CreateTaskState extends State<CreateTask> {
                     if (CreateTask.savedDescriptionsName.length == 1) {
                       /// code
                     } else {
-                      /// After we have accessed the first variable, next time, we increment the counter variable
+                      /// After we have accessed the first value, next time, we increment the counter variable
                       /// to access the next task name..
                       CreateTask.counterOfTasksDescription++;
+                    }
+
+                    /// Check to see if the textDecorList.length == 1, to still be able to use the counter
+                    /// variable, without an error, because when we create the first task, we need to access the first value of the list.
+                    if (CreateTask.textDecorList.length == 1) {
+                      /// code
+                    } else {
+                      /// After we have accessed the first value, next time, we increment the counter variable
+                      /// to access the next task name..
+                      CreateTask.counterOfTextDecorations++;
                     }
 
                     /// We add a TaskWidget to the task's list, passing the
@@ -306,7 +320,9 @@ class _CreateTaskState extends State<CreateTask> {
                         CreateTask
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
-                            CreateTask.counterOfTasksDescription]));
+                            CreateTask.counterOfTasksDescription],
+                        CreateTask.textDecorList[
+                            CreateTask.counterOfTextDecorations]));
                   },
                   child: Text('Create Task'),
                 ),

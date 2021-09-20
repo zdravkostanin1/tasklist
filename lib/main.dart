@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:calendar_appbar/calendar_appbar.dart';
 import 'CreateTaskScreen.dart';
 import 'Settings.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
   runApp(
@@ -21,6 +23,31 @@ class _MyAppState extends State<MyApp> {
   int bottomNavIndex = 0;
   bool changed = false;
   String taskName = CreateTask.taskName;
+  static bool test = false;
+  static int testingIntegers = 0;
+  static int newLength = 0;
+  static List<TaskWidget> newListOfWidgets = [];
+
+  clearSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+  }
+
+  getBoolValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    CreateTask.idk = prefs.getBool('asd')!;
+    print(CreateTask.idk);
+    // print(CreateTask.taskList);
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // clearSP();
+    getBoolValue();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +56,7 @@ class _MyAppState extends State<MyApp> {
         /// A expandable calendar implemented as a appBar
         appBar: CalendarAppBar(
           onDateChanged: (value) {
-            print(value);
+            // print(value);
           },
           firstDate: DateTime.now().subtract(Duration(days: 140)),
           lastDate: DateTime.now(),
@@ -94,7 +121,10 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             /// We  use a ternary operator to check if somebody clicked on the 'Create Task' button.
-            CreateTask.clickedOnCreateTask
+            CreateTask.idk
+                // CreateTask.clickedOnCreateTask
+                //     idk
+                // test
 
                 /// if clicked, we put an expanded widget, to fit the most possible tasks in the screen.
                 ? Expanded(
@@ -104,13 +134,20 @@ class _MyAppState extends State<MyApp> {
                       itemCount: CreateTask.taskList.length,
                       itemBuilder: (context, index) {
                         /// Here we return the CheckboxListTile's saved in the taskList with the index
+                        // testingIntegers = index;
+                        // saveIndex();
+                        // return CreateTask.forUse[index];
                         return CreateTask.taskList[index];
                       },
                     ),
                   )
 
                 /// If 'Create Task' button is not clicked, put an empty container, e.g task is not created
-                : Container(),
+                : Container(
+                    width: 100.0,
+                    height: 100.0,
+                    color: Colors.red,
+                  ),
           ],
         ),
       ),
@@ -155,6 +192,7 @@ class TaskWidget extends StatefulWidget {
 
 class _TaskWidgetState extends State<TaskWidget> {
   bool checkboxChecked = false;
+  bool test = false;
 
   /// A method that checks if task is checked, then changes the TextStyle decoration
   /// to a lineThrough. + Changes the color of the completed task's text to red.
@@ -178,6 +216,17 @@ class _TaskWidgetState extends State<TaskWidget> {
             CreateTask.colorList[CreateTask.counterOfColors];
       });
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // test();
+    // getBoolValue();
+    // populateFields();
+    // getValuesFromSP();
+    // getValue();
   }
 
   @override

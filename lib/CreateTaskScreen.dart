@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:tasklist_flutter/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateTask extends StatefulWidget {
   static bool isSwitched = false;
@@ -18,12 +21,29 @@ class CreateTask extends StatefulWidget {
   static List<TextDecoration> textDecorList = [];
   static List<Color> colorList = [];
   static int counterOfColors = 0;
+  static bool test = false;
+  static bool newBoolValue = false;
+  static String testOne = '';
+  static bool idk = false;
+  static List newValueOfTasksListEncoded = [];
+  static String asd = '';
+  static String b = '';
+  static var s;
+  static var forUse;
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
 }
 
 class _CreateTaskState extends State<CreateTask> {
+  saveBoolValue() async {
+    // print(CreateTask.clickedOnCreateTask);
+    if (CreateTask.clickedOnCreateTask != false) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setBool('asd', CreateTask.clickedOnCreateTask);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -261,6 +281,9 @@ class _CreateTaskState extends State<CreateTask> {
                     /// we update the variable clickedOnCreateTask, to then use it
                     CreateTask.clickedOnCreateTask = true;
 
+                    // CreateTask.newBoolValue = true;
+                    // CreateTask.test = true;
+
                     /// Adding an TextDecoration that is equal to none for every new task.
                     CreateTask.textDecorList.add(TextDecoration.none);
 
@@ -339,6 +362,16 @@ class _CreateTaskState extends State<CreateTask> {
                         CreateTask
                             .textDecorList[CreateTask.counterOfTextDecorations],
                         CreateTask.colorList[CreateTask.counterOfColors]));
+                    saveBoolValue();
+                    // toJson();
+                    // saveValueOfList();
+                    // var test = jsonEncode(CreateTask.taskList);
+                    // encodeMyVar();
+                    // toJson();
+                    // saveEncodedListIntoSP();
+                    // decodeMyVar();
+                    // saveIntoSPAndEncode();
+                    // saveWidgetAsStringIntoSP();
                   },
                   child: Text('Create Task'),
                 ),

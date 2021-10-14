@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:tasklist_flutter/main.dart';
@@ -25,11 +24,24 @@ class CreateTask extends StatefulWidget {
   static bool newBoolValue = false;
   static String testOne = '';
   static bool idk = false;
-  static List newValueOfTasksListEncoded = [];
+  static List<TaskWidget> newValueOfTasksListEncoded = [];
   static String asd = '';
   static String b = '';
   static var s;
   static var forUse;
+  static String sTest = '';
+  static String another = '';
+  // static CreateTask b234 = CreateTask();
+
+  // Map<String, dynamic> toJson() => {
+  //       'taskList': taskList,
+  //       'tasksNameList': savedTasksName,
+  //       'descriptionsNamesList': savedDescriptionsName,
+  //       'textDecorationsList': textDecorList,
+  //       'colorsList': colorList,
+  //     };
+
+  // CreateTask.fromJson(Map<String, dynamic> json) : taskList = json['taskList'];
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
@@ -40,8 +52,23 @@ class _CreateTaskState extends State<CreateTask> {
     // print(CreateTask.clickedOnCreateTask);
     if (CreateTask.clickedOnCreateTask != false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('asd', CreateTask.clickedOnCreateTask);
+      // String jsonDescriptions = jsonEncode(CreateTask);
+      // prefs.setString('asd4', jsonDescriptions);
+      prefs.setBool('asd13', CreateTask.clickedOnCreateTask);
     }
+  }
+
+  saveEncodedList() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    CreateTask.sTest = jsonEncode(CreateTask.taskList.toString());
+    // print(CreateTask.sTest);
+    prefs.setString("test456", CreateTask.sTest);
+  }
+
+  testToSaveListInADifferentWay() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setStringList('bsd3', jsonEncode(CreateTask.taskList);
+    prefs.setString("bsd2", jsonEncode(CreateTask.taskList.toString()));
   }
 
   @override
@@ -363,15 +390,8 @@ class _CreateTaskState extends State<CreateTask> {
                             .textDecorList[CreateTask.counterOfTextDecorations],
                         CreateTask.colorList[CreateTask.counterOfColors]));
                     saveBoolValue();
-                    // toJson();
-                    // saveValueOfList();
-                    // var test = jsonEncode(CreateTask.taskList);
-                    // encodeMyVar();
-                    // toJson();
-                    // saveEncodedListIntoSP();
-                    // decodeMyVar();
-                    // saveIntoSPAndEncode();
-                    // saveWidgetAsStringIntoSP();
+                    // testToSaveListInADifferentWay();
+                    // saveEncodedList();
                   },
                   child: Text('Create Task'),
                 ),

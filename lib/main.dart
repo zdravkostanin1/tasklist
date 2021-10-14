@@ -26,7 +26,8 @@ class _MyAppState extends State<MyApp> {
   static bool test = false;
   static int testingIntegers = 0;
   static int newLength = 0;
-  static List<TaskWidget> newListOfWidgets = [];
+  static String test2 = "";
+  static List<TaskWidget> taskWidgetsList = [];
 
   clearSP() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -35,10 +36,28 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('asd')!;
+    CreateTask.idk = prefs.getBool('asd13') ?? false;
+    // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
+    // print(jsonTasks);
     print(CreateTask.idk);
     // print(CreateTask.taskList);
     setState(() {});
+  }
+
+  getEncodedList() async {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // taskWidgetsList[0] = jsonDecode(prefs.getString("newTest29") ?? "");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('bsd2') != null) {
+      print(prefs.getString('bsd2'));
+    }
+    // print(jsonDecode(prefs.getString("newTest31") ?? ""));
+  }
+
+  void saveData() {
+    List<String> spList =
+        CreateTask.taskList.map((task) => jsonEncode(task.toMap())).toList();
+    print(spList);
   }
 
   @override
@@ -47,6 +66,10 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     // clearSP();
     getBoolValue();
+    // saveData();
+    // getEncodedList();
+    // getEncodedList();
+    // print(CreateTask.taskList);
   }
 
   @override
@@ -137,7 +160,9 @@ class _MyAppState extends State<MyApp> {
                         // testingIntegers = index;
                         // saveIndex();
                         // return CreateTask.forUse[index];
+                        // saveData();
                         return CreateTask.taskList[index];
+                        //jsonDecode(taskWidgetsList[index]);
                       },
                     ),
                   )
@@ -185,6 +210,21 @@ class TaskWidget extends StatefulWidget {
   /// also the color.
   TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription,
       this.decorOfText, this.colorOfTasksText);
+
+  TaskWidget.fromMap(Map map)
+      : this.textOfTheTaskName = map['taskName'],
+        this.textOfTheTasksDescription = map['taskDesc'],
+        this.decorOfText = map['decorOfText'],
+        this.colorOfTasksText = map['decorOfText'];
+
+  Map toMap() {
+    return {
+      'taskName': this.textOfTheTaskName,
+      'taskDesc': this.textOfTheTasksDescription,
+      'colorOfTaskText': this.colorOfTasksText,
+      'decorOfText': this.decorOfText
+    };
+  }
 
   @override
   _TaskWidgetState createState() => _TaskWidgetState();

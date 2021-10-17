@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('savedBool') ?? false;
+    CreateTask.idk = prefs.getBool('savedBool4') ?? false;
     // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
     // print(jsonTasks);
     print(CreateTask.idk);
@@ -47,9 +47,9 @@ class _MyAppState extends State<MyApp> {
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('teeeest72') ?? asd;
-    CreateTask.taskList
-        .addAll(list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
+    List<String> list = prefs.getStringList('savedDataOfTask3') ?? asd;
+    CreateTask.taskList =
+        (list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
     setState(() {});
   }
 
@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     // clearSP();
     getBoolValue();
-    // loadData();
+    loadData();
   }
 
   @override
@@ -204,7 +204,6 @@ class TaskWidget extends StatefulWidget {
   // this.colorOfTasksText = map['colorOfTask'];
 
   Map<String, dynamic> toMap() {
-    // print(this.colorOfTasksText);
     return {
       'taskName': this.textOfTheTaskName,
       'taskDesc': this.textOfTheTasksDescription

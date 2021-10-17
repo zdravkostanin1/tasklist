@@ -173,8 +173,6 @@ class _MyAppState extends State<MyApp> {
 /// This is the CheckboxListTile widget template that we'll be using.
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
-  static Color textColor = Color(0xFF000000);
-
   /// Created an object so i could access the 'textOfTheTaskName' after initialization
   static TaskWidget taskWidgetObject = TaskWidget(
     '',

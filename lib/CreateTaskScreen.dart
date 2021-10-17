@@ -54,7 +54,7 @@ class _CreateTaskState extends State<CreateTask> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       // String jsonDescriptions = jsonEncode(CreateTask);
       // prefs.setString('asd4', jsonDescriptions);
-      prefs.setBool('asd13', CreateTask.clickedOnCreateTask);
+      prefs.setBool('slide82', CreateTask.clickedOnCreateTask);
     }
   }
 
@@ -69,6 +69,15 @@ class _CreateTaskState extends State<CreateTask> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // prefs.setStringList('bsd3', jsonEncode(CreateTask.taskList);
     prefs.setString("bsd2", jsonEncode(CreateTask.taskList.toString()));
+  }
+
+  void saveData() async {
+    List<String> spList =
+        CreateTask.taskList.map((e) => jsonEncode(e.toMap())).toList();
+    print(spList);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList('teeeest72', spList);
+    setState(() {});
   }
 
   @override
@@ -382,14 +391,12 @@ class _CreateTaskState extends State<CreateTask> {
                     /// string that is based on the savedTasksName list, using the counter of the widget number as the index
                     /// We also add the description of the tasks, which is also based on the list of Descriptions.
                     CreateTask.taskList.add(TaskWidget(
-                        CreateTask
-                            .savedTasksName[CreateTask.counterOfTasksName],
-                        CreateTask.savedDescriptionsName[
-                            CreateTask.counterOfTasksDescription],
-                        CreateTask
-                            .textDecorList[CreateTask.counterOfTextDecorations],
-                        CreateTask.colorList[CreateTask.counterOfColors]));
-                    saveBoolValue();
+                      CreateTask.savedTasksName[CreateTask.counterOfTasksName],
+                      CreateTask.savedDescriptionsName[
+                          CreateTask.counterOfTasksDescription],
+                    ));
+                    // saveBoolValue();
+                    // saveData();
                     // testToSaveListInADifferentWay();
                     // saveEncodedList();
                   },

@@ -28,6 +28,7 @@ class _MyAppState extends State<MyApp> {
   static int newLength = 0;
   static String test2 = "";
   static List<TaskWidget> taskWidgetsList = [];
+  static List<String> asd = [];
 
   clearSP() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -36,7 +37,7 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('asd13') ?? false;
+    CreateTask.idk = prefs.getBool('slide82') ?? false;
     // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
     // print(jsonTasks);
     print(CreateTask.idk);
@@ -54,18 +55,39 @@ class _MyAppState extends State<MyApp> {
     // print(jsonDecode(prefs.getString("newTest31") ?? ""));
   }
 
-  void saveData() {
-    List<String> spList =
-        CreateTask.taskList.map((task) => jsonEncode(task.toMap())).toList();
-    print(spList);
+  // void saveData() async {
+  //   List<String> spList = CreateTask.taskList
+  //       .map((taskWidgetObject) => jsonEncode(taskWidgetObject.toMap()))
+  //       .toList();
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setStringList('list', spList);
+  //   // setState(() {});
+  //   // print(spList);
+  // }
+
+  void loadData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String> list = prefs.getStringList('teeeest72') ?? asd;
+    // print(list.length);
+    // print(CreateTask.taskList.length);
+    CreateTask.taskList
+        .addAll(list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
+    // CreateTask.taskList.add(jsonDecode(list[0]));
+    // print(CreateTask.taskList.length);
+    // CreateTask.taskList =
+    //     list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList();
+    // CreateTask.tasklist.add()
+    setState(() {});
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    // clearSP();
-    getBoolValue();
+    clearSP();
+    // getBoolValue();
+    // loadData();
+    // print(CreateTask.taskList.length);
     // saveData();
     // getEncodedList();
     // getEncodedList();
@@ -187,10 +209,9 @@ class TaskWidget extends StatefulWidget {
 
   /// Created an object so i could access the 'textOfTheTaskName' after initialization
   static TaskWidget taskWidgetObject = TaskWidget(
-      '',
-      '',
-      CreateTask.textDecorList[CreateTask.counterOfTextDecorations],
-      Colors.black);
+    '',
+    '',
+  );
 
   /// Variable to store every task's name individually
   final String textOfTheTaskName;
@@ -199,30 +220,30 @@ class TaskWidget extends StatefulWidget {
   final String textOfTheTasksDescription;
 
   /// A variable, used in the constructor, so the user could pass a value when calling the widget.
-  TextDecoration decorOfText;
+  TextDecoration decorOfText = TextDecoration.none;
 
   /// Color variable, to use in the constructor, for the user to pass a value when calling the widget.
-  Color colorOfTasksText;
+  Color colorOfTasksText = Color(0xFF000000);
 
   /// Constructor, so every time a new widget of CheckboxListTile is called, we pass a new task name
   /// also we pass a new description of the task.
   /// initializing the decoration of text as well.
   /// also the color.
-  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription,
-      this.decorOfText, this.colorOfTasksText);
+  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription);
 
-  TaskWidget.fromMap(Map map)
+  TaskWidget.fromMap(Map<String, dynamic> map)
       : this.textOfTheTaskName = map['taskName'],
-        this.textOfTheTasksDescription = map['taskDesc'],
-        this.decorOfText = map['decorOfText'],
-        this.colorOfTasksText = map['decorOfText'];
+        this.textOfTheTasksDescription = map['taskDesc'];
+  // this.decorOfText = map['decorOfText'],
+  // this.colorOfTasksText = map['colorOfTask'];
 
-  Map toMap() {
+  Map<String, dynamic> toMap() {
+    // print(this.colorOfTasksText);
     return {
       'taskName': this.textOfTheTaskName,
-      'taskDesc': this.textOfTheTasksDescription,
-      'colorOfTaskText': this.colorOfTasksText,
-      'decorOfText': this.decorOfText
+      'taskDesc': this.textOfTheTasksDescription
+      // 'colorOfTask': this.colorOfTasksText.toString(),
+      // 'decorOfText': this.decorOfText
     };
   }
 
@@ -258,10 +279,21 @@ class _TaskWidgetState extends State<TaskWidget> {
     }
   }
 
+  // void saveData() async {
+  //   List<String> spList = CreateTask.taskList
+  //       .map((taskWidgetObject) => jsonEncode(taskWidgetObject.toMap()))
+  //       .toList();
+  //   print(spList);
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setStringList('teeeest11', spList);
+  //   setState(() {});
+  // }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    // saveData();
     // test();
     // getBoolValue();
     // populateFields();
@@ -288,7 +320,7 @@ class _TaskWidgetState extends State<TaskWidget> {
           checkboxChecked = value!;
 
           /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
-          checkTextDecorationAndColor();
+          // checkTextDecorationAndColor();
         });
       },
       title: Text(
@@ -296,8 +328,8 @@ class _TaskWidgetState extends State<TaskWidget> {
         widget.textOfTheTaskName,
         style: TextStyle(
           fontSize: 18.0,
-          color: widget.colorOfTasksText,
-          decoration: widget.decorOfText,
+          // color: widget.colorOfTasksText,
+          // decoration: widget.decorOfText,
         ),
       ),
     );

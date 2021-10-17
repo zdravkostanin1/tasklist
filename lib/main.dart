@@ -37,7 +37,7 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('slide82') ?? false;
+    CreateTask.idk = prefs.getBool('savedBool') ?? false;
     // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
     // print(jsonTasks);
     print(CreateTask.idk);
@@ -45,38 +45,11 @@ class _MyAppState extends State<MyApp> {
     setState(() {});
   }
 
-  getEncodedList() async {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
-    // taskWidgetsList[0] = jsonDecode(prefs.getString("newTest29") ?? "");
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.getString('bsd2') != null) {
-      print(prefs.getString('bsd2'));
-    }
-    // print(jsonDecode(prefs.getString("newTest31") ?? ""));
-  }
-
-  // void saveData() async {
-  //   List<String> spList = CreateTask.taskList
-  //       .map((taskWidgetObject) => jsonEncode(taskWidgetObject.toMap()))
-  //       .toList();
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setStringList('list', spList);
-  //   // setState(() {});
-  //   // print(spList);
-  // }
-
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String> list = prefs.getStringList('teeeest72') ?? asd;
-    // print(list.length);
-    // print(CreateTask.taskList.length);
     CreateTask.taskList
         .addAll(list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
-    // CreateTask.taskList.add(jsonDecode(list[0]));
-    // print(CreateTask.taskList.length);
-    // CreateTask.taskList =
-    //     list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList();
-    // CreateTask.tasklist.add()
     setState(() {});
   }
 
@@ -84,14 +57,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    clearSP();
-    // getBoolValue();
+    // clearSP();
+    getBoolValue();
     // loadData();
-    // print(CreateTask.taskList.length);
-    // saveData();
-    // getEncodedList();
-    // getEncodedList();
-    // print(CreateTask.taskList);
   }
 
   @override
@@ -278,16 +246,6 @@ class _TaskWidgetState extends State<TaskWidget> {
       });
     }
   }
-
-  // void saveData() async {
-  //   List<String> spList = CreateTask.taskList
-  //       .map((taskWidgetObject) => jsonEncode(taskWidgetObject.toMap()))
-  //       .toList();
-  //   print(spList);
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setStringList('teeeest11', spList);
-  //   setState(() {});
-  // }
 
   @override
   void initState() {

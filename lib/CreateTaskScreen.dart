@@ -54,21 +54,8 @@ class _CreateTaskState extends State<CreateTask> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       // String jsonDescriptions = jsonEncode(CreateTask);
       // prefs.setString('asd4', jsonDescriptions);
-      prefs.setBool('slide82', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBool', CreateTask.clickedOnCreateTask);
     }
-  }
-
-  saveEncodedList() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.sTest = jsonEncode(CreateTask.taskList.toString());
-    // print(CreateTask.sTest);
-    prefs.setString("test456", CreateTask.sTest);
-  }
-
-  testToSaveListInADifferentWay() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // prefs.setStringList('bsd3', jsonEncode(CreateTask.taskList);
-    prefs.setString("bsd2", jsonEncode(CreateTask.taskList.toString()));
   }
 
   void saveData() async {
@@ -395,10 +382,8 @@ class _CreateTaskState extends State<CreateTask> {
                       CreateTask.savedDescriptionsName[
                           CreateTask.counterOfTasksDescription],
                     ));
-                    // saveBoolValue();
+                    saveBoolValue();
                     // saveData();
-                    // testToSaveListInADifferentWay();
-                    // saveEncodedList();
                   },
                   child: Text('Create Task'),
                 ),

@@ -54,7 +54,7 @@ class _CreateTaskState extends State<CreateTask> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       // String jsonDescriptions = jsonEncode(CreateTask);
       // prefs.setString('asd4', jsonDescriptions);
-      prefs.setBool('savedBool4', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBool5', CreateTask.clickedOnCreateTask);
     }
   }
 
@@ -63,7 +63,7 @@ class _CreateTaskState extends State<CreateTask> {
         CreateTask.taskList.map((e) => jsonEncode(e.toMap())).toList();
     print(spList);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('savedDataOfTask3', spList);
+    prefs.setStringList('savedDataOfTask4', spList);
     setState(() {});
   }
 

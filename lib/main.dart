@@ -243,12 +243,6 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // saveData();
-    // test();
-    // getBoolValue();
-    // populateFields();
-    // getValuesFromSP();
-    // getValue();
   }
 
   @override
@@ -267,7 +261,7 @@ class _TaskWidgetState extends State<TaskWidget> {
       activeColor: Color(0xFF4562FE),
       onChanged: (value) {
         setState(() {
-          checkboxChecked = value!;
+          checkboxChecked = value ?? false;
 
           /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
           // checkTextDecorationAndColor();

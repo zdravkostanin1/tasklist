@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('savedBool5') ?? false;
+    CreateTask.idk = prefs.getBool('savedBool85') ?? false;
     // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
     // print(jsonTasks);
     print(CreateTask.idk);
@@ -42,11 +42,19 @@ class _MyAppState extends State<MyApp> {
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask4') ?? asd;
+    List<String> list = prefs.getStringList('savedDataOfTask85') ?? asd;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
+    // print(prefs.getStringList('savedDataOfTask65'));
     setState(() {});
   }
+
+  // void loadColorData() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   Color color = Color(prefs.getInt('bbbb3') ?? 0xFF000000);
+  //   print(color);
+  //   print(prefs.getInt('bbbb3'));
+  // }
 
   @override
   void initState() {
@@ -55,6 +63,7 @@ class _MyAppState extends State<MyApp> {
     // clearSP();
     getBoolValue();
     loadData();
+    // loadColorData();
   }
 
   @override
@@ -169,10 +178,7 @@ class _MyAppState extends State<MyApp> {
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
   /// Created an object so i could access the 'textOfTheTaskName' after initialization
-  static TaskWidget taskWidgetObject = TaskWidget(
-    '',
-    '',
-  );
+  static TaskWidget taskWidgetObject = TaskWidget('', '');
 
   /// Variable to store every task's name individually
   final String textOfTheTaskName;
@@ -186,23 +192,30 @@ class TaskWidget extends StatefulWidget {
   /// Color variable, to use in the constructor, for the user to pass a value when calling the widget.
   Color colorOfTasksText = Color(0xFF000000);
 
+  int aaa = 0;
+
+  // int asd = colorOfTasksText.value;
+
   /// Constructor, so every time a new widget of CheckboxListTile is called, we pass a new task name
   /// also we pass a new description of the task.
   /// initializing the decoration of text as well.
   /// also the color.
+
   TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription);
 
   TaskWidget.fromMap(Map<String, dynamic> map)
       : this.textOfTheTaskName = map['taskName'],
         this.textOfTheTasksDescription = map['taskDesc'];
+  // this.aaa = map['intValue'];
   // this.decorOfText = map['decorOfText'],
   // this.colorOfTasksText = map['colorOfTask'];
 
   Map<String, dynamic> toMap() {
     return {
       'taskName': this.textOfTheTaskName,
-      'taskDesc': this.textOfTheTasksDescription
-      // 'colorOfTask': this.colorOfTasksText.toString(),
+      'taskDesc': this.textOfTheTasksDescription,
+      // 'intValue': this.aaa,
+      // 'colorOfTask': this.colorOfTasksText.value
       // 'decorOfText': this.decorOfText
     };
   }
@@ -214,35 +227,109 @@ class TaskWidget extends StatefulWidget {
 class _TaskWidgetState extends State<TaskWidget> {
   bool checkboxChecked = false;
   bool test = false;
+  List<int> myIntegerList = [];
+  String niceTryVar = "true";
+  Color colorObj = Colors.black;
+  int anotherTest = 0;
+
+  // Color color = Color(0xFF000000);
+  // int myTestColorValue = 1;
+  // Color otherColor = Colors.black;
+  Color color = Color(0xFF000000);
+
+  void loadColorData() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    colorObj = Color(prefs.getInt('colorData148') ?? 0);
+    color = colorObj;
+    setState(() {});
+  }
+
+  void saveSecondColor() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('secondColorSaved', colorObj.value);
+  }
+
+  void getSecondColorValue() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    anotherTest = prefs.getInt('secondColorSaved') ?? 0xFF000000;
+    color = Color(anotherTest);
+  }
 
   /// A method that checks if task is checked, then changes the TextStyle decoration
   /// to a lineThrough. + Changes the color of the completed task's text to red.
   void checkTextDecorationAndColor() {
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // String colorString = otherColor.toString();
+    // String valueString = colorString.split('(0x')[1].split(')')[0];
+    // int value = int.parse(valueString, radix: 16);
+    // Color otherColor2 = Color(value);
+    // prefs.setInt('keyB1', value);
     if (checkboxChecked == true) {
       setState(() {
-        /// Change the value of the specific item in list
-        CreateTask.textDecorList[CreateTask.counterOfTextDecorations] =
-            TextDecoration.lineThrough;
+        colorObj = Colors.red;
+        color = colorObj;
+        saveSecondColor();
+        // widget.aaa = Colors.red.value;
+        // color = Color(widget.aaa);
 
-        /// Getting the current index of the list's value, and changing the color of the task from black to red
-        CreateTask.colorList[CreateTask.counterOfColors] = Colors.red;
-
-        /// Then assign the changed value to the variable used for the decoration.
-        widget.decorOfText =
-            CreateTask.textDecorList[CreateTask.counterOfTextDecorations];
-
-        /// Assigning the value of the list at the counter index to the variable that is used
-        /// to represent the color of the widgets. Updating the color.
-        widget.colorOfTasksText =
-            CreateTask.colorList[CreateTask.counterOfColors];
+        // CreateTask.taskList.map((e) => jsonEncode(e.toMap())).toList();
+        // if (CreateTask.colorList.isNotEmpty) {
+        //   // widget.aaa = Colors.red.value;
+        //   // CreateTask.colorList[CreateTask.counterOfColors] = Color(widget.aaa);
+        // }
+        // widget.aaa = Colors.red.value;
+        // print(widget.aaa);
+        // widget.aaa = Colors.red.value;
+        // color = Color(Colors.red.value);
+        // Color b = Color(widget.aaa);
+        // CreateTask.colorList.add(b);
+        // CreateTask.colorList[CreateTask.counterOfColors]b;
+        // color = Color(widget.aaa);
+        // color = Colors.red;
+        // /// Change the value of the specific item in list
+        // CreateTask.textDecorList[CreateTask.counterOfTextDecorations] =
+        //     TextDecoration.lineThrough;
+        //
+        // /// Getting the current index of the list's value, and changing the color of the task from black to red
+        // CreateTask.colorList[CreateTask.counterOfColors] = Colors.red;
+        //
+        // /// Then assign the changed value to the variable used for the decoration.
+        // widget.decorOfText =
+        //     CreateTask.textDecorList[CreateTask.counterOfTextDecorations];
+        //
+        // /// Assigning the value of the list at the counter index to the variable that is used
+        // /// to represent the color of the widgets. Updating the color.
+        // widget.colorOfTasksText =
+        //     CreateTask.colorList[CreateTask.counterOfColors];
       });
     }
+    // print(widget.aaa);
+    // color = Color(widget.aaa);
   }
+
+  // void getBoolFromSP() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   test = prefs.getBool('4eettiri16') ?? false;
+  //   // setState(() {});
+  // }
+  //
+  // void saveBoolFromSP() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setBool('4eettiri16', checkboxChecked);
+  //   // setState(() {});
+  // }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    loadColorData();
+    getSecondColorValue();
+    // print(widget.aaa);
+    // print(Colors.black.value);
+    // getBoolFromSP();
+    // loadColorData();
+    // met();
   }
 
   @override
@@ -260,19 +347,30 @@ class _TaskWidgetState extends State<TaskWidget> {
       ),
       activeColor: Color(0xFF4562FE),
       onChanged: (value) {
+        // bool asd = value ?? false;
+        // SharedPreferences prefs = await SharedPreferences.getInstance();
+        // prefs.setBool('testValue123', value ?? false);
         setState(() {
           checkboxChecked = value ?? false;
 
           /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
-          // checkTextDecorationAndColor();
+          checkTextDecorationAndColor();
+          // widget.aaa = Colors.red.value;
+          // niceTryVar = "this was checked";
         });
+        // saveBoolFromSP();
       },
       title: Text(
         /// Using the object of the TaskWidget, we access the variable and set the Task Name, based on the passed String
         widget.textOfTheTaskName,
         style: TextStyle(
           fontSize: 18.0,
-          // color: widget.colorOfTasksText,
+          fontWeight: FontWeight.bold,
+          color: color,
+          // Color(widget
+          //     .aaa), //niceTryVar == 'this was checked' ? Colors.red : Colors.black,
+          //Colors.red,
+          //CreateTask.colorList[CreateTask.counterOfColors] //Colors.black,
           // decoration: widget.decorOfText,
         ),
       ),

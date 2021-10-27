@@ -54,7 +54,7 @@ class _CreateTaskState extends State<CreateTask> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       // String jsonDescriptions = jsonEncode(CreateTask);
       // prefs.setString('asd4', jsonDescriptions);
-      prefs.setBool('savedBool5', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBool85', CreateTask.clickedOnCreateTask);
     }
   }
 
@@ -63,8 +63,13 @@ class _CreateTaskState extends State<CreateTask> {
         CreateTask.taskList.map((e) => jsonEncode(e.toMap())).toList();
     print(spList);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('savedDataOfTask4', spList);
+    prefs.setStringList('savedDataOfTask85', spList);
     setState(() {});
+  }
+
+  void saveColorIntoSP() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt('colorData148', CreateTask.colorList[0].value);
   }
 
   @override
@@ -378,12 +383,15 @@ class _CreateTaskState extends State<CreateTask> {
                     /// string that is based on the savedTasksName list, using the counter of the widget number as the index
                     /// We also add the description of the tasks, which is also based on the list of Descriptions.
                     CreateTask.taskList.add(TaskWidget(
-                      CreateTask.savedTasksName[CreateTask.counterOfTasksName],
-                      CreateTask.savedDescriptionsName[
-                          CreateTask.counterOfTasksDescription],
-                    ));
+                        CreateTask
+                            .savedTasksName[CreateTask.counterOfTasksName],
+                        CreateTask.savedDescriptionsName[
+                            CreateTask.counterOfTasksDescription]));
+                    // CreateTask
+                    //                             .colorList[CreateTask.counterOfColors].value
                     saveBoolValue();
                     saveData();
+                    saveColorIntoSP();
                   },
                   child: Text('Create Task'),
                 ),

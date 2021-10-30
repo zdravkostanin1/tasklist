@@ -31,14 +31,14 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean1') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask') ?? asd;
+    List<String> list = prefs.getStringList('savedDataOfTask1') ?? asd;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
     setState(() {});
@@ -156,27 +156,18 @@ class _MyAppState extends State<MyApp> {
 /// This is the CheckboxListTile widget template that we'll be using.
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
-  /// Created an object so i could access the 'textOfTheTaskName' after initialization
+  //Created an object so i could access the 'textOfTheTaskName' after initialization
   static TaskWidget taskWidgetObject = TaskWidget('', '', 0);
 
-  /// Variable to store every task's name individually
   final String textOfTheTaskName;
 
-  /// Variable to store every task's description individually
   final String textOfTheTasksDescription;
 
-  /// A variable, used in the constructor, so the user could pass a value when calling the widget.
   TextDecoration decorOfText = TextDecoration.none;
 
-  /// Color variable, to use in the constructor, for the user to pass a value when calling the widget.
   Color colorOfTasksText = Color(0xFF000000);
 
   int intRepresentationOfColorVar;
-
-  /// Constructor, so every time a new widget of CheckboxListTile is called, we pass a new task name
-  /// also we pass a new description of the task.
-  /// initializing the decoration of text as well.
-  /// also the color.
 
   TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription,
       this.intRepresentationOfColorVar);
@@ -206,13 +197,13 @@ class _TaskWidgetState extends State<TaskWidget> {
     textColorVariable = Colors.red.value;
     widget.intRepresentationOfColorVar = textColorVariable;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('colorOfText', textColorVariable);
+    prefs.setInt('colorOfText1', textColorVariable);
     setState(() {});
   }
 
   void getColorForTextWidget() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    textColorVariable = prefs.getInt('colorOfText') ?? 0xFF000000;
+    textColorVariable = prefs.getInt('colorOfText1') ?? 0xFF000000;
     setState(() {});
   }
 

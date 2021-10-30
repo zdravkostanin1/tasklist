@@ -129,9 +129,6 @@ class _MyAppState extends State<MyApp> {
           children: [
             /// We  use a ternary operator to check if somebody clicked on the 'Create Task' button.
             CreateTask.idk
-                // CreateTask.clickedOnCreateTask
-                //     idk
-                // test
 
                 /// if clicked, we put an expanded widget, to fit the most possible tasks in the screen.
                 ? Expanded(

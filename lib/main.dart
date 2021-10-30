@@ -32,10 +32,7 @@ class _MyAppState extends State<MyApp> {
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     CreateTask.idk = prefs.getBool('savedBoolean') ?? false;
-    // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
-    // print(jsonTasks);
     print(CreateTask.idk);
-    // print(CreateTask.taskList);
     setState(() {});
   }
 

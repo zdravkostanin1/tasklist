@@ -141,12 +141,7 @@ class _MyAppState extends State<MyApp> {
                       itemCount: CreateTask.taskList.length,
                       itemBuilder: (context, index) {
                         /// Here we return the CheckboxListTile's saved in the taskList with the index
-                        // testingIntegers = index;
-                        // saveIndex();
-                        // return CreateTask.forUse[index];
-                        // saveData();
                         return CreateTask.taskList[index];
-                        //jsonDecode(taskWidgetsList[index]);
                       },
                     ),
                   )

@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('savedBool26') ?? false;
+    CreateTask.idk = prefs.getBool('savedBoolean') ?? false;
     // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
     // print(jsonTasks);
     print(CreateTask.idk);
@@ -41,7 +41,7 @@ class _MyAppState extends State<MyApp> {
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask26') ?? asd;
+    List<String> list = prefs.getStringList('savedDataOfTask') ?? asd;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
     setState(() {});

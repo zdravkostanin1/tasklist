@@ -268,16 +268,11 @@ class _TaskWidgetState extends State<TaskWidget> {
       ),
       activeColor: Color(0xFF4562FE),
       onChanged: (value) {
-        // bool asd = value ?? false;
-        // SharedPreferences prefs = await SharedPreferences.getInstance();
-        // prefs.setBool('testValue123', value ?? false);
         setState(() {
           checkboxChecked = value ?? false;
 
           /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
           checkTextDecorationAndColor();
-          // widget.aaa = Colors.red.value;
-          // niceTryVar = "this was checked";
         });
         // saveBoolFromSP();
       },

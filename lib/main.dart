@@ -32,7 +32,7 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('savedBool85') ?? false;
+    CreateTask.idk = prefs.getBool('savedBool26') ?? false;
     // String jsonTasks = jsonDecode(prefs.getString('asd4')!);
     // print(jsonTasks);
     print(CreateTask.idk);
@@ -42,19 +42,11 @@ class _MyAppState extends State<MyApp> {
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask85') ?? asd;
+    List<String> list = prefs.getStringList('savedDataOfTask26') ?? asd;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
-    // print(prefs.getStringList('savedDataOfTask65'));
     setState(() {});
   }
-
-  // void loadColorData() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   Color color = Color(prefs.getInt('bbbb3') ?? 0xFF000000);
-  //   print(color);
-  //   print(prefs.getInt('bbbb3'));
-  // }
 
   @override
   void initState() {
@@ -63,7 +55,6 @@ class _MyAppState extends State<MyApp> {
     // clearSP();
     getBoolValue();
     loadData();
-    // loadColorData();
   }
 
   @override
@@ -178,7 +169,7 @@ class _MyAppState extends State<MyApp> {
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
   /// Created an object so i could access the 'textOfTheTaskName' after initialization
-  static TaskWidget taskWidgetObject = TaskWidget('', '');
+  static TaskWidget taskWidgetObject = TaskWidget('', '', 0);
 
   /// Variable to store every task's name individually
   final String textOfTheTaskName;
@@ -192,7 +183,7 @@ class TaskWidget extends StatefulWidget {
   /// Color variable, to use in the constructor, for the user to pass a value when calling the widget.
   Color colorOfTasksText = Color(0xFF000000);
 
-  int aaa = 0;
+  int aaa;
 
   // int asd = colorOfTasksText.value;
 
@@ -201,12 +192,12 @@ class TaskWidget extends StatefulWidget {
   /// initializing the decoration of text as well.
   /// also the color.
 
-  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription);
+  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription, this.aaa);
 
   TaskWidget.fromMap(Map<String, dynamic> map)
       : this.textOfTheTaskName = map['taskName'],
-        this.textOfTheTasksDescription = map['taskDesc'];
-  // this.aaa = map['intValue'];
+        this.textOfTheTasksDescription = map['taskDesc'],
+        this.aaa = map['intValue'];
   // this.decorOfText = map['decorOfText'],
   // this.colorOfTasksText = map['colorOfTask'];
 
@@ -214,7 +205,7 @@ class TaskWidget extends StatefulWidget {
     return {
       'taskName': this.textOfTheTaskName,
       'taskDesc': this.textOfTheTasksDescription,
-      // 'intValue': this.aaa,
+      'intValue': this.aaa,
       // 'colorOfTask': this.colorOfTasksText.value
       // 'decorOfText': this.decorOfText
     };
@@ -230,7 +221,7 @@ class _TaskWidgetState extends State<TaskWidget> {
   List<int> myIntegerList = [];
   String niceTryVar = "true";
   Color colorObj = Colors.black;
-  int anotherTest = 0;
+  int anotherTest = Colors.black.value;
 
   // Color color = Color(0xFF000000);
   // int myTestColorValue = 1;
@@ -244,15 +235,31 @@ class _TaskWidgetState extends State<TaskWidget> {
     setState(() {});
   }
 
-  void saveSecondColor() async {
+  // void saveSecondColor() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('secondColorSaved', colorObj.value);
+  // }
+  //
+  // void getSecondColorValue() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   anotherTest = prefs.getInt('secondColorSaved') ?? 0xFF000000;
+  //   color = Color(anotherTest);
+  // }
+
+  void saveWidgetTripleA() async {
+    anotherTest = Colors.red.value;
+    widget.aaa = anotherTest;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('secondColorSaved', colorObj.value);
+    // anotherTest = prefs.getInt('widgetAAA') ?? 0xFF000000;
+    prefs.setInt('widgetAAA4528', anotherTest);
+    setState(() {});
   }
 
-  void getSecondColorValue() async {
+  void getWidgetTripleA() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    anotherTest = prefs.getInt('secondColorSaved') ?? 0xFF000000;
-    color = Color(anotherTest);
+    anotherTest = prefs.getInt('widgetAAA4528') ?? 0xFF000000;
+    // widget.aaa = anotherTest;
+    setState(() {});
   }
 
   /// A method that checks if task is checked, then changes the TextStyle decoration
@@ -266,9 +273,15 @@ class _TaskWidgetState extends State<TaskWidget> {
     // prefs.setInt('keyB1', value);
     if (checkboxChecked == true) {
       setState(() {
-        colorObj = Colors.red;
-        color = colorObj;
-        saveSecondColor();
+        // widget.aaa = Colors.red.value;
+        // color = Color(widget.aaa);
+        // getWidgetTripleA();
+        saveWidgetTripleA();
+        // widget.aaa = anotherTest;
+        // saveWidgetTripleA();
+        // saveWidgetTripleA();
+        // saveSecondColor();
+
         // widget.aaa = Colors.red.value;
         // color = Color(widget.aaa);
 
@@ -323,8 +336,11 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    loadColorData();
-    getSecondColorValue();
+    // saveWidgetTripleA();
+    getWidgetTripleA();
+    // saveWidgetTripleA();
+    // loadColorData();
+    // getSecondColorValue();
     // print(widget.aaa);
     // print(Colors.black.value);
     // getBoolFromSP();
@@ -366,7 +382,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         style: TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.bold,
-          color: color,
+          color: Color(widget.aaa),
           // Color(widget
           //     .aaa), //niceTryVar == 'this was checked' ? Colors.red : Colors.black,
           //Colors.red,

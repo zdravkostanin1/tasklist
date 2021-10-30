@@ -54,7 +54,7 @@ class _CreateTaskState extends State<CreateTask> {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       // String jsonDescriptions = jsonEncode(CreateTask);
       // prefs.setString('asd4', jsonDescriptions);
-      prefs.setBool('savedBool85', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBool26', CreateTask.clickedOnCreateTask);
     }
   }
 
@@ -63,7 +63,7 @@ class _CreateTaskState extends State<CreateTask> {
         CreateTask.taskList.map((e) => jsonEncode(e.toMap())).toList();
     print(spList);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('savedDataOfTask85', spList);
+    prefs.setStringList('savedDataOfTask26', spList);
     setState(() {});
   }
 
@@ -386,12 +386,12 @@ class _CreateTaskState extends State<CreateTask> {
                         CreateTask
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
-                            CreateTask.counterOfTasksDescription]));
-                    // CreateTask
-                    //                             .colorList[CreateTask.counterOfColors].value
+                            CreateTask.counterOfTasksDescription],
+                        CreateTask
+                            .colorList[CreateTask.counterOfColors].value));
                     saveBoolValue();
                     saveData();
-                    saveColorIntoSP();
+                    // saveColorIntoSP();
                   },
                   child: Text('Create Task'),
                 ),

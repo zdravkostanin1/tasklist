@@ -23,7 +23,7 @@ class CreateTask extends StatefulWidget {
   static bool test = false;
   static bool newBoolValue = false;
   static String testOne = '';
-  static bool idk = false;
+  static bool booleanValue = false;
 
   @override
   _CreateTaskState createState() => _CreateTaskState();

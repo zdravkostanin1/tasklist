@@ -31,8 +31,8 @@ class _MyAppState extends State<MyApp> {
 
   getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.idk = prefs.getBool('savedBoolean') ?? false;
-    print(CreateTask.idk);
+    CreateTask.booleanValue = prefs.getBool('savedBoolean') ?? false;
+    print(CreateTask.booleanValue);
     setState(() {});
   }
 
@@ -125,7 +125,7 @@ class _MyAppState extends State<MyApp> {
         body: Column(
           children: [
             /// We  use a ternary operator to check if somebody clicked on the 'Create Task' button.
-            CreateTask.idk
+            CreateTask.booleanValue
 
                 /// if clicked, we put an expanded widget, to fit the most possible tasks in the screen.
                 ? Expanded(

@@ -22,7 +22,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int bottomNavIndex = 0;
   String taskName = CreateTask.taskName;
-  static List<String> asd = [];
+  static List<String> emptyList = [];
 
   clearSP() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -38,7 +38,7 @@ class _MyAppState extends State<MyApp> {
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask1') ?? asd;
+    List<String> list = prefs.getStringList('savedDataOfTask1') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
     setState(() {});

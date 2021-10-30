@@ -38,11 +38,8 @@ class CreateTask extends StatefulWidget {
 
 class _CreateTaskState extends State<CreateTask> {
   saveBoolValue() async {
-    // print(CreateTask.clickedOnCreateTask);
     if (CreateTask.clickedOnCreateTask != false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      // String jsonDescriptions = jsonEncode(CreateTask);
-      // prefs.setString('asd4', jsonDescriptions);
       prefs.setBool('savedBoolean', CreateTask.clickedOnCreateTask);
     }
   }

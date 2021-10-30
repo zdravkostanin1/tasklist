@@ -31,17 +31,6 @@ class CreateTask extends StatefulWidget {
   static var forUse;
   static String sTest = '';
   static String another = '';
-  // static CreateTask b234 = CreateTask();
-
-  // Map<String, dynamic> toJson() => {
-  //       'taskList': taskList,
-  //       'tasksNameList': savedTasksName,
-  //       'descriptionsNamesList': savedDescriptionsName,
-  //       'textDecorationsList': textDecorList,
-  //       'colorsList': colorList,
-  //     };
-
-  // CreateTask.fromJson(Map<String, dynamic> json) : taskList = json['taskList'];
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
@@ -65,11 +54,6 @@ class _CreateTaskState extends State<CreateTask> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList('savedDataOfTask26', spList);
     setState(() {});
-  }
-
-  void saveColorIntoSP() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('colorData148', CreateTask.colorList[0].value);
   }
 
   @override
@@ -391,7 +375,6 @@ class _CreateTaskState extends State<CreateTask> {
                             .colorList[CreateTask.counterOfColors].value));
                     saveBoolValue();
                     saveData();
-                    // saveColorIntoSP();
                   },
                   child: Text('Create Task'),
                 ),

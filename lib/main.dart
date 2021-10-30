@@ -21,7 +21,6 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int bottomNavIndex = 0;
-  bool changed = false;
   String taskName = CreateTask.taskName;
   static List<String> asd = [];
 
@@ -185,8 +184,6 @@ class TaskWidget extends StatefulWidget {
 
   int aaa;
 
-  // int asd = colorOfTasksText.value;
-
   /// Constructor, so every time a new widget of CheckboxListTile is called, we pass a new task name
   /// also we pass a new description of the task.
   /// initializing the decoration of text as well.
@@ -198,16 +195,12 @@ class TaskWidget extends StatefulWidget {
       : this.textOfTheTaskName = map['taskName'],
         this.textOfTheTasksDescription = map['taskDesc'],
         this.aaa = map['intValue'];
-  // this.decorOfText = map['decorOfText'],
-  // this.colorOfTasksText = map['colorOfTask'];
 
   Map<String, dynamic> toMap() {
     return {
       'taskName': this.textOfTheTaskName,
       'taskDesc': this.textOfTheTasksDescription,
       'intValue': this.aaa,
-      // 'colorOfTask': this.colorOfTasksText.value
-      // 'decorOfText': this.decorOfText
     };
   }
 
@@ -274,7 +267,6 @@ class _TaskWidgetState extends State<TaskWidget> {
           /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
           checkTextDecorationAndColor();
         });
-        // saveBoolFromSP();
       },
       title: Text(
         /// Using the object of the TaskWidget, we access the variable and set the Task Name, based on the passed String

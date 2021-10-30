@@ -37,7 +37,7 @@ class _CreateTaskState extends State<CreateTask> {
     }
   }
 
-  void saveData() async {
+  void saveTask() async {
     List<String> spList =
         CreateTask.taskList.map((e) => jsonEncode(e.toMap())).toList();
     print(spList);
@@ -364,7 +364,7 @@ class _CreateTaskState extends State<CreateTask> {
                         CreateTask
                             .colorList[CreateTask.counterOfColors].value));
                     saveBoolValue();
-                    saveData();
+                    saveTask();
                   },
                   child: Text('Create Task'),
                 ),

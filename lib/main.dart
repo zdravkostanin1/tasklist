@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
     prefs.clear();
   }
 
-  getBoolValue() async {
+  void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     CreateTask.booleanValue = prefs.getBool('savedBoolean1') ?? false;
     print(CreateTask.booleanValue);

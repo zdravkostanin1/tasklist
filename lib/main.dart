@@ -31,14 +31,14 @@ class _MyAppState extends State<MyApp> {
 
   void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean1') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean2') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask1') ?? emptyList;
+    List<String> list = prefs.getStringList('savedDataOfTask2') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromMap(jsonDecode(e))).toList());
     setState(() {});
@@ -197,13 +197,13 @@ class _TaskWidgetState extends State<TaskWidget> {
     textColorVariable = Colors.red.value;
     widget.intRepresentationOfColorVar = textColorVariable;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('colorOfText1', textColorVariable);
+    prefs.setInt('colorOfText2', textColorVariable);
     setState(() {});
   }
 
   void getColorForTextWidget() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    textColorVariable = prefs.getInt('colorOfText1') ?? 0xFF000000;
+    textColorVariable = prefs.getInt('colorOfText2') ?? 0xFF000000;
     setState(() {});
   }
 

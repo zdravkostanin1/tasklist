@@ -24,13 +24,6 @@ class CreateTask extends StatefulWidget {
   static bool newBoolValue = false;
   static String testOne = '';
   static bool idk = false;
-  static List<TaskWidget> newValueOfTasksListEncoded = [];
-  static String asd = '';
-  static String b = '';
-  static var s;
-  static var forUse;
-  static String sTest = '';
-  static String another = '';
 
   @override
   _CreateTaskState createState() => _CreateTaskState();

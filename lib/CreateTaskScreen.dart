@@ -21,27 +21,44 @@ class CreateTask extends StatefulWidget {
   static List<Color> colorList = [];
   static int counterOfColors = 0;
   static bool booleanValue = false;
+  static int intforTesting = 0;
+
+  // CreateTask.fromJson(Map<String, dynamic> map)
+  // : colorList = map['test'];
+
+  // Map<String, dynamic> toJson() {
+  //   return {'test': colorList};
 
   @override
   _CreateTaskState createState() => _CreateTaskState();
 }
 
 class _CreateTaskState extends State<CreateTask> {
+  // CreateTask task = CreateTask();
+
   saveBoolValue() async {
     if (CreateTask.clickedOnCreateTask != false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('savedBoolean3', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBoolean7', CreateTask.clickedOnCreateTask);
     }
   }
 
   void saveTask() async {
     List<String> spList =
-        CreateTask.taskList.map((e) => jsonEncode(e.toMap())).toList();
+        CreateTask.taskList.map((e) => jsonEncode(e.toJson())).toList();
     print(spList);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('savedDataOfTask3', spList);
+    prefs.setStringList('savedDataOfTask7', spList);
     setState(() {});
   }
+
+  // void saveAndUpdateTextColorToRed() async {
+  //   CreateTask.intforTesting = Colors.red.value;
+  //   widget.intRepresentationOfColorVar = textColorVariable;
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('colorOfText61', textColorVariable);
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -357,9 +374,7 @@ class _CreateTaskState extends State<CreateTask> {
                         CreateTask
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
-                            CreateTask.counterOfTasksDescription],
-                        CreateTask
-                            .colorList[CreateTask.counterOfColors].value));
+                            CreateTask.counterOfTasksDescription]));
                     saveBoolValue();
                     saveTask();
                   },

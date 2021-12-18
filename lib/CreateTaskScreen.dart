@@ -25,7 +25,7 @@ class CreateTask extends StatefulWidget {
 
   // CreateTask.fromJson(Map<String, dynamic> map)
   // : colorList = map['test'];
-
+  //
   // Map<String, dynamic> toJson() {
   //   return {'test': colorList};
 
@@ -39,7 +39,7 @@ class _CreateTaskState extends State<CreateTask> {
   saveBoolValue() async {
     if (CreateTask.clickedOnCreateTask != false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('savedBoolean7', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBoolean93', CreateTask.clickedOnCreateTask);
     }
   }
 
@@ -48,7 +48,7 @@ class _CreateTaskState extends State<CreateTask> {
         CreateTask.taskList.map((e) => jsonEncode(e.toJson())).toList();
     print(spList);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('savedDataOfTask7', spList);
+    prefs.setStringList('savedDataOfTask93', spList);
     setState(() {});
   }
 
@@ -370,11 +370,15 @@ class _CreateTaskState extends State<CreateTask> {
                     /// We add a TaskWidget to the task's list, passing the
                     /// string that is based on the savedTasksName list, using the counter of the widget number as the index
                     /// We also add the description of the tasks, which is also based on the list of Descriptions.
-                    CreateTask.taskList.add(TaskWidget(
+                    CreateTask.taskList.add(
+                      TaskWidget(
                         CreateTask
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
-                            CreateTask.counterOfTasksDescription]));
+                            CreateTask.counterOfTasksDescription],
+                        CreateTask.colorList[CreateTask.counterOfColors].value,
+                      ),
+                    );
                     saveBoolValue();
                     saveTask();
                   },

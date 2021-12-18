@@ -34,14 +34,14 @@ class _MyAppState extends State<MyApp> {
 
   void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean7') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean93') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask7') ?? emptyList;
+    List<String> list = prefs.getStringList('savedDataOfTask93') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromJson(jsonDecode(e))).toList());
     setState(() {});
@@ -160,7 +160,7 @@ class _MyAppState extends State<MyApp> {
 // ignore: must_be_immutable
 class TaskWidget extends StatefulWidget {
   //Created an object so i could access the 'textOfTheTaskName' after initialization
-  static TaskWidget taskWidgetObject = TaskWidget('', '');
+  static TaskWidget taskWidgetObject = TaskWidget('', '', Colors.black.value);
 
   final String textOfTheTaskName;
 
@@ -168,22 +168,25 @@ class TaskWidget extends StatefulWidget {
 
   TextDecoration decorOfText = TextDecoration.none;
 
-  Color colorOfTasksText = Colors.black;
+  int colorOfTasksText;
 
   int intRepresentationOfColorVar = 0;
 
   String stringRepresentationofTextDecVar = "";
 
-  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription);
+  TaskWidget(this.textOfTheTaskName, this.textOfTheTasksDescription,
+      this.colorOfTasksText);
 
   TaskWidget.fromJson(Map<String, dynamic> map)
       : this.textOfTheTaskName = map['taskName'],
-        this.textOfTheTasksDescription = map['taskDesc'];
+        this.textOfTheTasksDescription = map['taskDesc'],
+        this.colorOfTasksText = map['color'];
 
   Map<String, dynamic> toJson() {
     return {
       'taskName': this.textOfTheTaskName,
       'taskDesc': this.textOfTheTasksDescription,
+      'color': this.colorOfTasksText,
     };
   }
 
@@ -203,161 +206,96 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   // Color nextColor = Colors.black;
 
-  void convertToIntPlusSave() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    valueFromSP = colorVar.value;
-    prefs.setInt("d131", valueFromSP);
-    // CreateTask.colorList[CreateTask.counterOfColors] = Colors.red;
-    setState(() {});
-  }
-
-  void convertBackPlusGet() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    colorVar = Color(prefs.getInt("d131") ?? 0);
-    setState(() {});
-  }
-
   void test555() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('dunnoAnymore35', widget.intRepresentationOfColorVar);
+    prefs.setInt('testTheColor13', widget.colorOfTasksText);
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
-    // setState(() {
-    //   if (widget.intRepresentationOfColorVar == Colors.black.value) {
-    //     widget.intRepresentationOfColorVar = Colors.black.value;
-    //     textColorVariable = widget.intRepresentationOfColorVar;
-    //     // widget.colorOfTasksText = Color(textColorVariable);
-    //     prefs.setInt("tryhard170", textColorVariable);
-    //     setState(() {});
-    //   } else if (widget.intRepresentationOfColorVar == Colors.red.value) {
-    //     widget.intRepresentationOfColorVar = Colors.red.value;
-    //     textColorVariable = widget.intRepresentationOfColorVar;
-    //     // widget.colorOfTasksText = Color(textColorVariable);
-    //     prefs.setInt("hardtry170", textColorVariable);
-    //     setState(() {});
-    //   }
-    // });
   }
 
   void test666() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (CreateTask.taskList.length > 1) {
-      widget.intRepresentationOfColorVar = Colors.black.value;
-    } else {
-      widget.intRepresentationOfColorVar =
-          prefs.getInt('dunnoAnymore35') ?? Colors.black.value;
-    }
+    // widget.colorOfTasksText =
+    //     prefs.getInt('testTheColor9') ?? Colors.black.value;
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
-    // setState(() {
-    //   if (textColorVariable == Colors.red.value) {
-    //     textColorVariable = prefs.getInt('tryhard170') ?? Colors.black.value;
-    //     widget.intRepresentationOfColorVar = textColorVariable;
-    //     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
-    //     setState(() {});
-    //   } else if (textColorVariable == Colors.black.value) {
-    //     textColorVariable = prefs.getInt('hardtry170') ?? Colors.black.value;
-    //     widget.intRepresentationOfColorVar = textColorVariable;
-    //     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
-    //     setState(() {});
-    //   }
-    // });
   }
 
-  void saveColor() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    widget.colorOfTasksText = Colors.red;
-    prefs.setInt("confused123", widget.colorOfTasksText.value);
-    setState(() {});
-  }
-
-  void getColor() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // widget.colorOfTasksText =
-    //     Color(prefs.getInt('someColor39') ?? Colors.black.value);
-    // textColorVariable = prefs.getInt("someColor42") ?? 0;
-    // widget.colorOfTasksText = Color(textColorVariable);
-    widget.colorOfTasksText =
-        Color(prefs.getInt("someColor61") ?? Colors.black.value);
-    // CreateTask.colorList[CreateTask.counterOfColors] = Colors.black;
-    // print(widget.colorOfTasksText.value);
-    setState(() {});
-  }
-
-  void saveAndUpdateTextColorToRed() async {
-    textColorVariable = Colors.red.value;
-    widget.intRepresentationOfColorVar = textColorVariable;
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('colorOfText131', textColorVariable);
-    // print("This is text $textColorVariable");
-    setState(() {});
-  }
-
-  void getColorForTextWidget() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    // if (CreateTask.taskList.length == 0) {
-    //   widget.intRepresentationOfColorVar =
-    //       prefs.getInt('colorOfText73') ?? 0xFF000000;
-    // }
-    // if (textColorVariable == Colors.red.value) {
-    // widget.intRepresentationOfColorVar =
-    // prefs.getInt('colorOfText52') ?? 0xFF000000;
-    // } else {
-    // widget.intRepresentationOfColorVar =
-    //     prefs.getInt('colorOfText60') ?? 0xFF000000;
-    // if (CreateTask.taskList.length == 1) {
-    // if (CreateTask.taskList.length >= 1) {
-    textColorVariable = prefs.getInt('colorOfText134') ?? 0xFF000000;
-    // textColorVariable = prefs.getInt('colorOfText126') ?? 0xFF000000;
-    // widget.intRepresentationOfColorVar = textColorVariable;
-    // } else {
-    //   textColorVariable = prefs.getInt('colorOfText125') ?? 0xFF000000;
-    // }
-    // widget.intRepresentationOfColorVar = textColorVariable;
-    // } else {
-    // widget.intRepresentationOfColorVar =
-    //     prefs.getInt('colorOfText117') ?? 0xFF000000;
-    // widget.intRepresentationOfColorVar = textColorVariable;
-    // }
-    print(CreateTask.taskList.length);
-    // textColorVariable = prefs.getInt('colorOfText92') ?? 0xFF000000;
-    // widget.intRepresentationOfColorVar = textColorVariable;
-    // print(Colors.red.value);
-    // print(Colors.black.value);
-    // print("This is textColor $textColorVariable");
-    // print(widget.intRepresentationOfColorVar);
-    // print(CreateTask.colorList.length);
-    // }
-    // widget.intRepresentationOfColorVar =
-    //     prefs.getInt('colorOfText29') ?? 0xFF000000;
-    // widget.intRepresentationOfColorVar = textColorVariable;
-    setState(() {});
-  }
-
-  // void saveTextDecoration() async {
-  //   test = TextDecoration.lineThrough.toString();
-  //   widget.stringRepresentationofTextDecVar = test;
-  //   // print(widget.stringRepresentationofTextDecVar);
+  // void saveColor() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setString('textDecorOfTask3', test);
+  //   widget.colorOfTasksText = Colors.red;
+  //   prefs.setInt("confused123", widget.colorOfTasksText.value);
   //   setState(() {});
   // }
   //
-  // void getTextDecorationForText() async {
+  // void getColor() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   test = prefs.getString('textDecorOfTask3') ?? "";
-  //   if (widget.stringRepresentationofTextDecVar ==
-  //       "TextDecoration.lineThrough") {
-  //     textDecor = TextDecoration.lineThrough;
-  //     setState(() {});
-  //   }
+  //   // widget.colorOfTasksText =
+  //   //     Color(prefs.getInt('someColor39') ?? Colors.black.value);
+  //   // textColorVariable = prefs.getInt("someColor42") ?? 0;
+  //   // widget.colorOfTasksText = Color(textColorVariable);
+  //   widget.colorOfTasksText =
+  //       Color(prefs.getInt("someColor61") ?? Colors.black.value);
+  //   // CreateTask.colorList[CreateTask.counterOfColors] = Colors.black;
+  //   // print(widget.colorOfTasksText.value);
+  //   setState(() {});
+  // }
+  //
+  // void saveAndUpdateTextColorToRed() async {
+  //   textColorVariable = Colors.red.value;
+  //   widget.intRepresentationOfColorVar = textColorVariable;
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   prefs.setInt('colorOfText131', textColorVariable);
+  //   // print("This is text $textColorVariable");
+  //   setState(() {});
+  // }
+  //
+  // void getColorForTextWidget() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   // if (CreateTask.taskList.length == 0) {
+  //   //   widget.intRepresentationOfColorVar =
+  //   //       prefs.getInt('colorOfText73') ?? 0xFF000000;
+  //   // }
+  //   // if (textColorVariable == Colors.red.value) {
+  //   // widget.intRepresentationOfColorVar =
+  //   // prefs.getInt('colorOfText52') ?? 0xFF000000;
+  //   // } else {
+  //   // widget.intRepresentationOfColorVar =
+  //   //     prefs.getInt('colorOfText60') ?? 0xFF000000;
+  //   // if (CreateTask.taskList.length == 1) {
+  //   // if (CreateTask.taskList.length >= 1) {
+  //   textColorVariable = prefs.getInt('colorOfText134') ?? 0xFF000000;
+  //   // textColorVariable = prefs.getInt('colorOfText126') ?? 0xFF000000;
+  //   // widget.intRepresentationOfColorVar = textColorVariable;
+  //   // } else {
+  //   //   textColorVariable = prefs.getInt('colorOfText125') ?? 0xFF000000;
+  //   // }
+  //   // widget.intRepresentationOfColorVar = textColorVariable;
+  //   // } else {
+  //   // widget.intRepresentationOfColorVar =
+  //   //     prefs.getInt('colorOfText117') ?? 0xFF000000;
+  //   // widget.intRepresentationOfColorVar = textColorVariable;
+  //   // }
+  //   print(CreateTask.taskList.length);
+  //   // textColorVariable = prefs.getInt('colorOfText92') ?? 0xFF000000;
+  //   // widget.intRepresentationOfColorVar = textColorVariable;
+  //   // print(Colors.red.value);
+  //   // print(Colors.black.value);
+  //   // print("This is textColor $textColorVariable");
+  //   // print(widget.intRepresentationOfColorVar);
+  //   // print(CreateTask.colorList.length);
+  //   // }
+  //   //     prefs.getInt('colorOfText29') ?? 0xFF000000;
+  //   // widget.intRepresentationOfColorVar =
+  //   // widget.intRepresentationOfColorVar = textColorVariable;
+  //   setState(() {});
   // }
 
   // Changes the color of the completed task's text to red.
   void convertTextToRed() {
     if (checkboxChecked == true) {
       setState(() {
-        saveColor();
+        // saveColor();
         // widget.colorOfTasksText = Colors.red;
         // saveAndUpdateTextColorToRed();
       });
@@ -369,6 +307,8 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    test666();
+    // test666();
     // convertBackPlusGet();
     // print(colorVar);
     // test666();
@@ -396,6 +336,11 @@ class _TaskWidgetState extends State<TaskWidget> {
       onChanged: (value) {
         setState(() {
           checkboxChecked = value ?? false;
+          widget.colorOfTasksText = Colors.red.value;
+          test555();
+          // widget.decorOfText = TextDecoration.lineThrough;
+          // textDecor = TextDecoration.lineThrough;
+          // widget.colorOfTasksText = Colors.red;
           // colorVar = Colors.red;
           // convertToIntPlusSave();
           // String bbb = text.toString();
@@ -405,6 +350,7 @@ class _TaskWidgetState extends State<TaskWidget> {
           // convertTextToRed();
           // test555();
           // widget.intRepresentationOfColorVar = Colors.red.value;
+          // test555();
           // test555();
           // getColorForTextWidget();
           // saveTextDecoration();
@@ -416,8 +362,8 @@ class _TaskWidgetState extends State<TaskWidget> {
         style: TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.bold,
-          color: Colors.black,
-          decoration: textDecor,
+          color: Color(widget.colorOfTasksText),
+          decoration: widget.decorOfText,
         ),
       ),
     );

@@ -34,14 +34,14 @@ class _MyAppState extends State<MyApp> {
 
   void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean93') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean130') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask93') ?? emptyList;
+    List<String> list = prefs.getStringList('savedDataOfTask130') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromJson(jsonDecode(e))).toList());
     setState(() {});
@@ -208,15 +208,19 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   void test555() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('testTheColor13', widget.colorOfTasksText);
+    prefs.setInt('testTheColor50', widget.colorOfTasksText);
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
   }
 
   void test666() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // widget.colorOfTasksText =
-    //     prefs.getInt('testTheColor9') ?? Colors.black.value;
+    if (CreateTask.taskList.length >= 1 && checkboxChecked == true) {
+      widget.colorOfTasksText =
+          prefs.getInt('testTheColor50') ?? Colors.black.value;
+      // setState(() {});
+    }
+    // prefs.getInt('testTheColor16');
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
   }
@@ -308,6 +312,7 @@ class _TaskWidgetState extends State<TaskWidget> {
     // TODO: implement initState
     super.initState();
     test666();
+    print(CreateTask.taskList.length);
     // test666();
     // convertBackPlusGet();
     // print(colorVar);

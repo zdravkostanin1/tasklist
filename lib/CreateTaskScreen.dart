@@ -18,10 +18,11 @@ class CreateTask extends StatefulWidget {
   static TextEditingController descriptionController = TextEditingController();
   static int counterOfTextDecorations = 0;
   static List<TextDecoration> textDecorList = [];
-  static List<Color> colorList = [];
+  static List<int> colorList = [];
   static int counterOfColors = 0;
   static bool booleanValue = false;
   static int intforTesting = 0;
+  static int newCounterForColor = 0;
 
   // CreateTask.fromJson(Map<String, dynamic> map)
   // : colorList = map['test'];
@@ -39,7 +40,7 @@ class _CreateTaskState extends State<CreateTask> {
   saveBoolValue() async {
     if (CreateTask.clickedOnCreateTask != false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('savedBoolean130', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBoolean174', CreateTask.clickedOnCreateTask);
     }
   }
 
@@ -48,9 +49,14 @@ class _CreateTaskState extends State<CreateTask> {
         CreateTask.taskList.map((e) => jsonEncode(e.toJson())).toList();
     print(spList);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('savedDataOfTask130', spList);
+    prefs.setStringList('savedDataOfTask174', spList);
     setState(() {});
   }
+
+  // void saveColorList() async {
+  //   List<String> spList =
+  //       CreateTask.colorList.map((e) => jsonEncode(e.toJson())).toList();
+  // }
 
   // void saveAndUpdateTextColorToRed() async {
   //   CreateTask.intforTesting = Colors.red.value;
@@ -304,7 +310,10 @@ class _CreateTaskState extends State<CreateTask> {
                     CreateTask.textDecorList.add(TextDecoration.none);
 
                     /// Adding the color of the task to the list
-                    CreateTask.colorList.add(Colors.black);
+                    CreateTask.colorList.add(Colors.black.value);
+
+                    ///testing here
+                    CreateTask.newCounterForColor++;
 
                     /// We add the task name to the 'savedTasksName' list
                     CreateTask.savedTasksName.add(CreateTask.taskName);
@@ -376,7 +385,7 @@ class _CreateTaskState extends State<CreateTask> {
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
                             CreateTask.counterOfTasksDescription],
-                        CreateTask.colorList[CreateTask.counterOfColors].value,
+                        CreateTask.colorList[CreateTask.counterOfColors],
                       ),
                     );
                     saveBoolValue();

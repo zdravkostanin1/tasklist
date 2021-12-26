@@ -18,7 +18,7 @@ class CreateTask extends StatefulWidget {
   static TextEditingController descriptionController = TextEditingController();
   static int counterOfTextDecorations = 0;
   static List<TextDecoration> textDecorList = [];
-  static List<int> colorList = [];
+  static List<Color> colorList = [];
   static int counterOfColors = 0;
   static bool booleanValue = false;
   static int intforTesting = 0;
@@ -40,7 +40,7 @@ class _CreateTaskState extends State<CreateTask> {
   saveBoolValue() async {
     if (CreateTask.clickedOnCreateTask != false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setBool('savedBoolean174', CreateTask.clickedOnCreateTask);
+      prefs.setBool('savedBoolean178', CreateTask.clickedOnCreateTask);
     }
   }
 
@@ -49,7 +49,7 @@ class _CreateTaskState extends State<CreateTask> {
         CreateTask.taskList.map((e) => jsonEncode(e.toJson())).toList();
     print(spList);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList('savedDataOfTask174', spList);
+    prefs.setStringList('savedDataOfTask178', spList);
     setState(() {});
   }
 
@@ -310,7 +310,7 @@ class _CreateTaskState extends State<CreateTask> {
                     CreateTask.textDecorList.add(TextDecoration.none);
 
                     /// Adding the color of the task to the list
-                    CreateTask.colorList.add(Colors.black.value);
+                    CreateTask.colorList.add(Colors.black);
 
                     ///testing here
                     CreateTask.newCounterForColor++;
@@ -385,7 +385,7 @@ class _CreateTaskState extends State<CreateTask> {
                             .savedTasksName[CreateTask.counterOfTasksName],
                         CreateTask.savedDescriptionsName[
                             CreateTask.counterOfTasksDescription],
-                        CreateTask.colorList[CreateTask.counterOfColors],
+                        CreateTask.colorList[CreateTask.counterOfColors].value,
                       ),
                     );
                     saveBoolValue();

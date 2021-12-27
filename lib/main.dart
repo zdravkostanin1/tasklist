@@ -34,14 +34,14 @@ class _MyAppState extends State<MyApp> {
 
   void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean183') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean209') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask183') ?? emptyList;
+    List<String> list = prefs.getStringList('savedDataOfTask209') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromJson(jsonDecode(e))).toList());
     setState(() {});
@@ -208,7 +208,7 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   void test555() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('testTheColor104', widget.colorOfTasksText);
+    prefs.setInt('testTheColor135', widget.colorOfTasksText);
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
   }
@@ -217,9 +217,25 @@ class _TaskWidgetState extends State<TaskWidget> {
     // CreateTask.colorList[CreateTask.counterOfColors] =
     //     Color(widget.colorOfTasksText);
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (isRed == true && widget.colorOfTasksText == Colors.black.value) {
+      widget.colorOfTasksText =
+          prefs.getInt('testTheColor135') ?? Colors.black.value;
+    }
+    isRed = false;
+    saveSome();
     // widget.colorOfTasksText =
     //     prefs.getInt('testTheColor69') ?? Colors.black.value;
     setState(() {});
+  }
+
+  void saveSome() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("key137", isRed);
+  }
+
+  void getSome() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    isRed = prefs.getBool("key137") ?? false;
   }
 
   // Changes the color of the completed task's text to red.
@@ -238,8 +254,11 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    getSome();
     test666();
-    print(CreateTask.colorList.length);
+    // print(CreateTask.colorList.length);
+    // print(isRed);
+    // print(widget.colorOfTasksText);
     // test666();
     // convertBackPlusGet();
     // print(colorVar);
@@ -269,7 +288,9 @@ class _TaskWidgetState extends State<TaskWidget> {
         setState(() {
           checkboxChecked = value ?? false;
           widget.colorOfTasksText = Colors.red.value;
+          isRed = true;
           test555();
+          saveSome();
           // widget.decorOfText = TextDecoration.lineThrough;
           // textDecor = TextDecoration.lineThrough;
           // widget.colorOfTasksText = Colors.red;

@@ -34,14 +34,14 @@ class _MyAppState extends State<MyApp> {
 
   void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean216') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean238') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask216') ?? emptyList;
+    List<String> list = prefs.getStringList('savedDataOfTask238') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromJson(jsonDecode(e))).toList());
     setState(() {});
@@ -208,7 +208,7 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   void test555() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('testTheColor143', widget.colorOfTasksText);
+    prefs.setInt('testTheColor165', widget.colorOfTasksText);
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
   }
@@ -217,9 +217,10 @@ class _TaskWidgetState extends State<TaskWidget> {
     // CreateTask.colorList[CreateTask.counterOfColors] =
     //     Color(widget.colorOfTasksText);
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    // first block --> red/black
     if (isRed == true && widget.colorOfTasksText == Colors.black.value) {
       widget.colorOfTasksText =
-          prefs.getInt('testTheColor143') ?? Colors.black.value;
+          prefs.getInt('testTheColor165') ?? Colors.black.value;
     }
     isRed = false;
     saveSome();
@@ -230,12 +231,12 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   void saveSome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("key144", isRed);
+    prefs.setBool("key165", isRed);
   }
 
   void getSome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isRed = prefs.getBool("key144") ?? false;
+    isRed = prefs.getBool("key165") ?? false;
   }
 
   // Changes the color of the completed task's text to red.

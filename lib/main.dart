@@ -34,14 +34,14 @@ class _MyAppState extends State<MyApp> {
 
   void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean238') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean243') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask238') ?? emptyList;
+    List<String> list = prefs.getStringList('savedDataOfTask243') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromJson(jsonDecode(e))).toList());
     setState(() {});
@@ -208,7 +208,7 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   void test555() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('testTheColor165', widget.colorOfTasksText);
+    prefs.setInt('testTheColor170', widget.colorOfTasksText);
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
   }
@@ -217,10 +217,10 @@ class _TaskWidgetState extends State<TaskWidget> {
     // CreateTask.colorList[CreateTask.counterOfColors] =
     //     Color(widget.colorOfTasksText);
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    // first block --> red/black
+    // this code here works if one task is made & the checkbox is checked.
     if (isRed == true && widget.colorOfTasksText == Colors.black.value) {
       widget.colorOfTasksText =
-          prefs.getInt('testTheColor165') ?? Colors.black.value;
+          prefs.getInt('testTheColor170') ?? Colors.black.value;
     }
     isRed = false;
     saveSome();
@@ -231,12 +231,12 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   void saveSome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool("key165", isRed);
+    prefs.setBool("key170", isRed);
   }
 
   void getSome() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    isRed = prefs.getBool("key165") ?? false;
+    isRed = prefs.getBool("key170") ?? false;
   }
 
   // Changes the color of the completed task's text to red.

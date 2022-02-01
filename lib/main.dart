@@ -34,14 +34,14 @@ class _MyAppState extends State<MyApp> {
 
   void getBoolValue() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    CreateTask.booleanValue = prefs.getBool('savedBoolean261') ?? false;
+    CreateTask.booleanValue = prefs.getBool('savedBoolean25') ?? false;
     print(CreateTask.booleanValue);
     setState(() {});
   }
 
   void loadData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> list = prefs.getStringList('savedDataOfTask261') ?? emptyList;
+    List<String> list = prefs.getStringList('savedDataOfTask25') ?? emptyList;
     CreateTask.taskList =
         (list.map((e) => TaskWidget.fromJson(jsonDecode(e))).toList());
     setState(() {});
@@ -208,7 +208,7 @@ class _TaskWidgetState extends State<TaskWidget> {
 
   void test555() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt('testTheColor190', widget.colorOfTasksText);
+    prefs.setInt('testTheColor25', widget.colorOfTasksText);
     // widget.colorOfTasksText = Color(widget.intRepresentationOfColorVar);
     setState(() {});
   }
@@ -225,8 +225,10 @@ class _TaskWidgetState extends State<TaskWidget> {
     //   // widget.colorOfTasksText = Colors.red.value;
     // } else
     // if (isRed == true && widget.colorOfTasksText == Colors.black.value) {
+    // if (true) {
     widget.colorOfTasksText =
-        prefs.getInt('testTheColor190') ?? Colors.black.value;
+        prefs.getInt('testTheColor25') ?? Colors.black.value;
+    // }
     // }
     // isRed = false;
     // saveSome();
@@ -235,6 +237,11 @@ class _TaskWidgetState extends State<TaskWidget> {
     //     prefs.getInt('testTheColor69') ?? Colors.black.value;
     setState(() {});
   }
+
+  // void getInt() async {
+  //   SharedPreferences prefs = await SharedPreferences.getInstance();
+  //   count = prefs.getInt("d3") ?? 0;
+  // }
 
   // void saveSome() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -262,6 +269,8 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    // getInt();
+    // widget.colorOfTasksText = Colors.red.value;
     test666();
     // print(CreateTask.colorList.length);
     // print(isRed);
@@ -295,6 +304,7 @@ class _TaskWidgetState extends State<TaskWidget> {
         setState(() {
           checkboxChecked = value ?? false;
           widget.colorOfTasksText = Colors.red.value;
+          // setState(() {});
           // isRed = true;
           test555();
           // widget.decorOfText = TextDecoration.lineThrough;

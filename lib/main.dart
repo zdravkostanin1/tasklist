@@ -204,8 +204,6 @@ class _TaskWidgetState extends State<TaskWidget> {
   Color colorVar = Colors.black;
   int valueFromSP = 0;
 
-  // Color nextColor = Colors.black;
-
   void test555() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     // prefs.setInt('testTheColor25', widget.colorOfTasksText);
@@ -237,21 +235,6 @@ class _TaskWidgetState extends State<TaskWidget> {
     setState(() {});
   }
 
-  // void getInt() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   count = prefs.getInt("d3") ?? 0;
-  // }
-
-  // void saveSome() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setBool("key189", isRed);
-  // }
-  //
-  // void getSome() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   isRed = prefs.getBool("key189") ?? false;
-  // }
-
   // Changes the color of the completed task's text to red.
   void convertTextToRed() {
     if (checkboxChecked == true) {
@@ -268,22 +251,8 @@ class _TaskWidgetState extends State<TaskWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    // getInt();
-    // widget.colorOfTasksText = Colors.red.value;
     // code here
     // test666();
-    // print(CreateTask.colorList.length);
-    // print(isRed);
-    // print(widget.colorOfTasksText);
-    // test666();
-    // convertBackPlusGet();
-    // print(colorVar);
-    // test666();
-    // getColor();
-    // print(widget.colorOfTasksText);
-    // saveAndUpdateTextColorToRed();
-    // getColorForTextWidget();
-    // getTextDecorationForText();
   }
 
   @override
@@ -303,27 +272,8 @@ class _TaskWidgetState extends State<TaskWidget> {
       onChanged: (value) {
         setState(() {
           checkboxChecked = value ?? false;
-          // widget.colorOfTasksText = Colors.red.value;
-          // setState(() {});
-          // isRed = true;
           // code here
           // test555();
-          // widget.decorOfText = TextDecoration.lineThrough;
-          // textDecor = TextDecoration.lineThrough;
-          // widget.colorOfTasksText = Colors.red;
-          // colorVar = Colors.red;
-          // convertToIntPlusSave();
-          // String bbb = text.toString();
-          // print(bbb);
-
-          /// This checks if the checkbox is ticked, so then calls the method that puts a line trough the text
-          // convertTextToRed();
-          // test555();
-          // widget.intRepresentationOfColorVar = Colors.red.value;
-          // test555();
-          // test555();
-          // getColorForTextWidget();
-          // saveTextDecoration();
         });
       },
       title: Text(

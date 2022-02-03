@@ -25,19 +25,11 @@ class CreateTask extends StatefulWidget {
   static int newCounterForColor = 0;
   static int countOfTasks = 0;
 
-  // CreateTask.fromJson(Map<String, dynamic> map)
-  // : colorList = map['test'];
-  //
-  // Map<String, dynamic> toJson() {
-  //   return {'test': colorList};
-
   @override
   _CreateTaskState createState() => _CreateTaskState();
 }
 
 class _CreateTaskState extends State<CreateTask> {
-  // CreateTask task = CreateTask();
-
   saveBoolValue() async {
     if (CreateTask.clickedOnCreateTask != false) {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -53,24 +45,6 @@ class _CreateTaskState extends State<CreateTask> {
     prefs.setStringList('savedDataOfTask27', spList);
     setState(() {});
   }
-
-  // void saveInt() async {
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setInt("d2", CreateTask.countOfTasks);
-  // }
-
-  // void saveColorList() async {
-  //   List<String> spList =
-  //       CreateTask.colorList.map((e) => jsonEncode(e.toJson())).toList();
-  // }
-
-  // void saveAndUpdateTextColorToRed() async {
-  //   CreateTask.intforTesting = Colors.red.value;
-  //   widget.intRepresentationOfColorVar = textColorVariable;
-  //   SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   prefs.setInt('colorOfText61', textColorVariable);
-  //   setState(() {});
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -396,8 +370,6 @@ class _CreateTaskState extends State<CreateTask> {
                     );
                     saveBoolValue();
                     saveTask();
-                    // CreateTask.countOfTasks++;
-                    // saveInt();
                   },
                   child: Text('Create Task'),
                 ),
